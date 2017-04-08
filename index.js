@@ -13,7 +13,8 @@ function getPseudoName(importeePatten) {
 	});
 }
 
-function globImport({include, exclude, debug}) {
+function globImport(options = {}) {
+	const {include, exclude, debug} = options;
 	const filter = createFilter(include, exclude);
 	const codes = {};
 	return {
