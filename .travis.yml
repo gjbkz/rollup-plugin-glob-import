@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '7'
+- '6'
+addons:
+  code_climate: fe20cd20ee3c975692e3ec1dfd7e96d48c51a93a0ec1b42191f5d5141c726e00
+script: npm run test_coverage
+after_success:
+- npm install -g codeclimate-test-reporter
+- CODECLIMATE_REPO_TOKEN=fe20cd20ee3c975692e3ec1dfd7e96d48c51a93a0ec1b42191f5d5141c726e00
+  codeclimate-test-reporter < ./coverage/lcov.info
+notifications:
+  slack:
+    secure: WSoBOLOjHQyfqBRg7GlEYVZp72Sg+XLLf0z9/1InIAPisIYy9VyEsPbIWzWuAJ0NiJZ+V46ugcDTir0janZe4r6/fpM1cPc4hZSHT2DZqLcbEgG5Z9HNzql8YQUqUU+EEZ9qBEH3c79cfxHQcLKITUwczf4556+ZSu0G2gE7bPoQFeAyuIu9Cehaw4iJWcozqL9/AloChhxtgdZ8zQAqZICI+KdWv/Ik5+rKfEWt/uFBd/4Kqm3tQh5sYBIXlHeLh/ACBllXoCMtZlfXQkwliUCPpIZ9+WFPLF7WzFH5HxKfg5V6XcZP8bjtypEBlg+ikFA+4nmQgA5BavSZO8xd8U8dDDDVcc9aXYZqZcAX9jB/eyT9awMvHvzLv+2ggvfNdlC2X6MXxBBaitGjQhd7GsKnWAMENLs9k0YDE/D8XEcuon8nxdkv65WU5WEB9ccF50WOir86qGJPIkRNO7W3+risycT6KH1Lw5AKkJR9r2hq96oJr6eks/C4FfGPpT1SnvOK5xttvUYl1mnYzLLGtWJ6thRR+4EkDabuSBp0twQ1ycnFLlgZsghl4/VNGgAJ1DYn8AjaPEK2owXDXMVtxSP4ui2zNrqBv0OeRXn4M8RxdQvX2ellii+N8buQjboXqBY4DCcXb7zEQfjbRUSGErc+kGqfmqStrqEIs+oSPi0=
