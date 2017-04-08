@@ -1,0 +1,33 @@
+{
+  "name": "rollup-plugin-glob-import",
+  "version": "0.0.1",
+  "description": "Enables import '../*/test.js'",
+  "license": "MIT",
+  "repository": "kei-ito/rollup-plugin-glob-import",
+  "author": {
+    "name": "Kei Ito",
+    "email": "kei.itof@gmail.com",
+    "url": "https://github.com/kei-ito"
+  },
+  "keywords": [
+    "rollup",
+    "glob"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "mocha ./test/*/test.js",
+    "test_coverage": "istanbul cover _mocha ./test/*/test.js"
+  },
+  "dependencies": {
+    "glob": "^7.1.1",
+    "j1": "^0.0.25",
+    "rollup-pluginutils": "^2.0.1"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.4"
+  }
+}
