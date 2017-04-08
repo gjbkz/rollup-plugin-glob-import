@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-glob-import",
   "version": "0.0.1",
-  "description": "Enables import '../*/test.js'",
+  "description": "A rollup plugin to use glob-star.",
   "license": "MIT",
   "repository": "kei-ito/rollup-plugin-glob-import",
   "author": {
