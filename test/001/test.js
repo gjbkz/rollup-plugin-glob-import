@@ -4,11 +4,13 @@ const {rollup} = require('rollup');
 const globImport = require('../..');
 
 it('should parse *', function () {
+	const entry = path.join(__dirname, 'src.js');
+	const plugins = [
+		globImport({debug: true})
+	];
 	return rollup({
-		entry: path.join(__dirname, 'src.js'),
-		plugins: [
-			globImport({debug: true})
-		]
+		entry,
+		plugins
 	})
 	.then((bundle) => {
 		const {code} = bundle.generate({format: 'es'});
