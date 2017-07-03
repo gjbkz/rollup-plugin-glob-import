@@ -1,14 +1,15 @@
 language: node_js
 node_js:
+- '8'
 - '7'
-- '6'
-addons:
-  code_climate: fe20cd20ee3c975692e3ec1dfd7e96d48c51a93a0ec1b42191f5d5141c726e00
 script: npm run test_coverage
 after_success:
-- npm install -g codeclimate-test-reporter
-- CODECLIMATE_REPO_TOKEN=fe20cd20ee3c975692e3ec1dfd7e96d48c51a93a0ec1b42191f5d5141c726e00
-  codeclimate-test-reporter < ./coverage/lcov.info
+- npm install codacy-coverage
+- cat ./coverage/lcov.info | ./node_modules/codacy-coverage/bin/codacy-coverage.js
+  --debug
 notifications:
   slack:
     secure: WSoBOLOjHQyfqBRg7GlEYVZp72Sg+XLLf0z9/1InIAPisIYy9VyEsPbIWzWuAJ0NiJZ+V46ugcDTir0janZe4r6/fpM1cPc4hZSHT2DZqLcbEgG5Z9HNzql8YQUqUU+EEZ9qBEH3c79cfxHQcLKITUwczf4556+ZSu0G2gE7bPoQFeAyuIu9Cehaw4iJWcozqL9/AloChhxtgdZ8zQAqZICI+KdWv/Ik5+rKfEWt/uFBd/4Kqm3tQh5sYBIXlHeLh/ACBllXoCMtZlfXQkwliUCPpIZ9+WFPLF7WzFH5HxKfg5V6XcZP8bjtypEBlg+ikFA+4nmQgA5BavSZO8xd8U8dDDDVcc9aXYZqZcAX9jB/eyT9awMvHvzLv+2ggvfNdlC2X6MXxBBaitGjQhd7GsKnWAMENLs9k0YDE/D8XEcuon8nxdkv65WU5WEB9ccF50WOir86qGJPIkRNO7W3+risycT6KH1Lw5AKkJR9r2hq96oJr6eks/C4FfGPpT1SnvOK5xttvUYl1mnYzLLGtWJ6thRR+4EkDabuSBp0twQ1ycnFLlgZsghl4/VNGgAJ1DYn8AjaPEK2owXDXMVtxSP4ui2zNrqBv0OeRXn4M8RxdQvX2ellii+N8buQjboXqBY4DCcXb7zEQfjbRUSGErc+kGqfmqStrqEIs+oSPi0=
+env:
+  global:
+    secure: j4a9YRrvB1rh2keAUxmYsSDk6vSANy5aLsA6emn+VYGT4SR0Ytl0gpO78kK/9F2bNgdJvEA9kS8Wk6xqFqOhaPs/f4jmTwr4fRuMhmBi8wzBNN9z8cTf6MsEKqY0DFkogFUqABbeDqjaxKdJhbEAfe+chf/hV6f6F7NL+9QFqtiI0yBGmww405tN5JkxkX+RCTA71j8ZzMcVVYZ2lGnEBZi6CTCc1e25z1GXA9o9AcP90DARxl31uMuomPf22HAzo1nxQGbXwnbjYhIVnzFsSYbxAKvif05kEMmyg8ue8T8iQCVP73pw0YbfhFXFNF10W3Yh/i+uONCcsl/NQbtieZbAaziRMeDmCVpxSqt7+YQjQW1cTL51JWHiJ6Ky16c+345i06PFFNQWeipNJj0NMWEde6JWe55vj6RY8RD9hfrsnOqU1Pyv6TiQfeqW4kv7mZZlRkmF+/IjOwxCOCkVD/e9LGfpMIfpsKMRAGsokoglTKUMJPS1o/a4c9p9dgAOYVbkfmPNuoSL48RX+Ua++tXp3kRVhoQO05ilaqceqL82m/BxuEbTZuLWVy4q1iNHJTwlx/v9gedfu4qiVFu+RuL//BVHfJZuejQDYHSqN1zKF+K+yKAEvE6ZJj3wjNhSGnoiUnfsSuvHABoOPk9sq/vFcgj6ysY2Fwu4/oYedqE=

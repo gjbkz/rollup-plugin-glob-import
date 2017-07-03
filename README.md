@@ -1,8 +1,8 @@
 # rollup-plugin-glob-import
 
 [![Build Status](https://travis-ci.org/kei-ito/rollup-plugin-glob-import.svg?branch=master)](https://travis-ci.org/kei-ito/rollup-plugin-glob-import)
-[![Code Climate](https://codeclimate.com/github/kei-ito/rollup-plugin-glob-import/badges/gpa.svg)](https://codeclimate.com/github/kei-ito/rollup-plugin-glob-import)
-[![Test Coverage](https://codeclimate.com/github/kei-ito/rollup-plugin-glob-import/badges/coverage.svg)](https://codeclimate.com/github/kei-ito/rollup-plugin-glob-import/coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1a12f6323344567bf18e1c5aa833fea)](https://www.codacy.com/app/kei.itof/rollup-plugin-glob-import?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kei-ito/rollup-plugin-glob-import&amp;utm_campaign=Badge_Grade)
+ort/coverage)
 [![dependencies Status](https://david-dm.org/kei-ito/rollup-plugin-glob-import/status.svg)](https://david-dm.org/kei-ito/rollup-plugin-glob-import)
 
 A plugin to use glob-star.
