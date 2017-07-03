@@ -17,29 +17,30 @@ function globImport(options = {}) {
 	const {include, exclude, debug} = options;
 	const filter = createFilter(include, exclude);
 	const codes = {};
-	return {
-		resolveId: function (importee, importer = '') {
-			if (!filter(importee) || importee.indexOf('*') < 0) {
-				return null;
-			}
-			const dir = path.dirname(importer);
-			return glob(path.join(dir, importee))
-			.then((files) => {
-				const code = files
-				.map((file) => {
-					return `import './${path.relative(dir, file)}'`;
-				}).join('\n');
-				const id = path.join(dir, getPseudoName(importee));
-				if (debug) {
-					console.info(`${importee}\n${code}`);
-				}
-				codes[id] = code;
-				return id;
-			});
-		},
-		load: (id) => {
-			return codes[id];
+	async function resolveId(importee, importer = '') {
+		if (!filter(importee) || importee.indexOf('*') < 0) {
+			return null;
 		}
+		const dir = path.dirname(importer);
+		const files = await glob(path.join(dir, importee));
+		const code = files
+		.map((file) => {
+			return `import './${path.relative(dir, file)}'`;
+		}).join('\n');
+		const id = path.join(dir, getPseudoName(importee));
+		if (debug) {
+			console.info(`${importee}\n${code}`);
+		}
+		codes[id] = code;
+		return id;
+	}
+	function load(id) {
+		return codes[id];
+	}
+	return {
+		name: 'glob-import',
+		resolveId,
+		load
 	};
 }
 
