@@ -14,7 +14,7 @@
     "glob"
   ],
   "engines": {
-    "node": ">=7"
+    "node": ">=7.6"
   },
   "scripts": {
     "test": "node test",
