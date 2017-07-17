@@ -1,2 +1,4 @@
 rules:
-    no-console: 'off'
+    no-console: off
+    global-require: off
+    no-undef: off

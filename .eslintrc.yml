@@ -6,3 +6,7 @@ env:
     node: true
 extends:
     - eslint:recommended
+rules:
+    quotes: ['warn', 'single']
+    no-useless-concat: 'error'
+    prefer-template: 'error'

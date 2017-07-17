@@ -1,1 +1,1 @@
-console.log('003');
+c = value * 4;

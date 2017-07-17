@@ -1,1 +1,1 @@
-console.log('002');
+b = value * 3;
