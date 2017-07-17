@@ -13,13 +13,12 @@ function getPseudoName(importeePatten) {
 	});
 }
 
-function globImport(options = {}) {
-	const {include, exclude, debug} = options;
+function globImport({include, exclude, debug} = {}) {
 	const filter = createFilter(include, exclude);
-	const codes = {};
+	const codes = new Map();
 	return {
 		name: 'glob-import',
-		async resolveId(importee, importer = '') {
+		async resolveId(importee, importer) {
 			if (!filter(importee) || importee.indexOf('*') < 0) {
 				return null;
 			}
@@ -33,11 +32,11 @@ function globImport(options = {}) {
 			if (debug) {
 				console.info(`${importee}\n${code}`);
 			}
-			codes[id] = code;
+			codes.set(id, code);
 			return id;
 		},
 		load(id) {
-			return codes[id];
+			return codes.get(id);
 		}
 	};
 }
