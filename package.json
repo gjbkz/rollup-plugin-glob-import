@@ -17,12 +17,12 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "mocha test",
+    "test": "node test",
     "test_coverage": "istanbul cover test"
   },
   "dependencies": {
     "glob": "^7.1.1",
-    "j1": "^0.0.25",
+    "j1": "0.0.35",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
