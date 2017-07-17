@@ -19,7 +19,7 @@ async function test(projects) {
 			globImport({debug: true})
 		]
 	});
-	const {code} = bundle.generate({format: 'es'});
+	const {code} = await bundle.generate({format: 'es'});
 	await Promise.resolve(require(`./projects/${projectName}/test`)(code));
 	await test(projects);
 }
