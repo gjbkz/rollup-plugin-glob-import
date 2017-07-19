@@ -1,1 +1,1 @@
-b = value * 3;
+result.b = 3;

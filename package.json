@@ -17,12 +17,12 @@
     "node": ">=7.6"
   },
   "scripts": {
-    "test": "node test",
-    "test_coverage": "istanbul cover test"
+    "test": "node node_modules/j1/run test",
+    "test_coverage": "istanbul cover node_modules/j1/run test"
   },
   "dependencies": {
     "glob": "^7.1.1",
-    "j1": "0.0.35",
+    "j1": "0.0.36",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {

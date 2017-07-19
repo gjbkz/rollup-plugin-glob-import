@@ -1,1 +1,1 @@
-a = value * 2;
+result.a = 2;

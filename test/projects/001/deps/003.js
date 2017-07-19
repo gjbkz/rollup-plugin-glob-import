@@ -1,1 +1,1 @@
-c = value * 4;
+result.c = 4;

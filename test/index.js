@@ -1,32 +1,52 @@
-const fs = require('fs');
-const path = require('path');
-const promisify = require('j1/promisify');
-const console = require('j1/console').create('test');
-const readdir = promisify(fs.readdir, fs);
-const {rollup} = require('rollup');
-const globImport = require('..');
+async function test(run) {
 
-const projectsDir = path.join(__dirname, 'projects');
+	const assert = require('assert');
+	const fs = require('fs');
+	const path = require('path');
+	const vm = require('vm');
+	const promisify = require('j1/promisify');
+	const readdir = promisify(fs.readdir, fs);
+	const readFile = promisify(fs.readFile, fs);
+	const {rollup} = require('rollup');
+	const globImport = require('..');
+	const projectsDir = path.join(__dirname, 'projects');
 
-async function test(projects) {
-	const projectName = projects.shift();
-	if (!projectName) {
-		return;
+	for (const projectName of await readdir(projectsDir)) {
+		await run(projectName, async (run) => {
+
+			const projectDir = path.join(projectsDir, projectName);
+			const params = {};
+
+			await run('bundle', async () => {
+				params.bundle = await rollup({
+					entry: path.join(projectDir, 'index.js'),
+					plugins: [
+						globImport({debug: true})
+					]
+				});
+			});
+
+			await run('generate code', async () => {
+				params.code = (await params.bundle.generate({format: 'es'})).code;
+			});
+
+			await run('run code', () => {
+				params.result = {};
+				vm.runInNewContext(params.code, {result: params.result});
+			});
+
+			await run('load expected data', async () => {
+				params.expected = JSON.parse(await readFile(path.join(projectDir, 'expected.json'), 'utf8'));
+			});
+
+			await run('test the result', async () => {
+				const {result, expected} = params;
+				assert.equal(result.css, expected.css);
+				assert.deepEqual(result.style, expected.style);
+			});
+
+		});
 	}
-	const bundle = await rollup({
-		entry: path.join(projectsDir, projectName, 'index.js'),
-		plugins: [
-			globImport({debug: true})
-		]
-	});
-	const {code} = await bundle.generate({format: 'es'});
-	await Promise.resolve(require(`./projects/${projectName}/test`)(code));
-	await test(projects);
 }
 
-readdir(projectsDir)
-.then(test)
-.catch(function (error) {
-	console.onError(error);
-	process.exit(1);
-});
+module.exports = test;
