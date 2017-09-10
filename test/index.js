@@ -21,6 +21,15 @@ async function test(run) {
 				params.bundle = await rollup({
 					entry: path.join(projectDir, 'index.js'),
 					plugins: [
+						{
+							resolveId(importee, importer) {
+								if (importer && importee.includes('__dirname')) {
+									return importee
+									.split('__dirname')
+									.join(path.dirname(importer))
+								}
+							},
+						},
 						globImport({debug: true})
 					]
 				});
