@@ -22,13 +22,9 @@ async function test(run) {
 					entry: path.join(projectDir, 'index.js'),
 					plugins: [
 						{
-							resolveId(importee, importer) {
-								if (importer && importee.includes('__dirname')) {
-									return importee
-									.split('__dirname')
-									.join(path.dirname(importer))
-								}
-							},
+							transform(source, id) {
+								return source.split('__dirname').join(path.dirname(id));
+							}
 						},
 						globImport({debug: true})
 					]
