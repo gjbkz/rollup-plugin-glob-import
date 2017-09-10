@@ -8,18 +8,6 @@ charset = utf-8
 indent_style = tab
 indent_size = 4
 
-[*.css]
-indent_style = tab
-indent_size = 4
-
-[*.yml]
-indent_style = space
-indent_size = 2
-
-[*.md]
-indent_style = space
-indent_size = 2
-
-[*.json]
+[*.{yml,json,md}]
 indent_style = space
 indent_size = 2
