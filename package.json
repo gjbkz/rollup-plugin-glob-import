@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "istanbul": "^1.1.0-alpha.1",
-    "rollup": "^0.49.3",
-    "rollup-plugin-root-import": "^0.2.2"
+    "rollup": "^0.49.3"
   }
 }
