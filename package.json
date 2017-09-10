@@ -21,6 +21,7 @@
     "test_coverage": "istanbul cover node_modules/j1/run test/*/index.js"
   },
   "dependencies": {
+    "acorn": "^5.1.2",
     "glob": "^7.1.1",
     "j1": "0.0.36",
     "rollup-pluginutils": "^2.0.1"
