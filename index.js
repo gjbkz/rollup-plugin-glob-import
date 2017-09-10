@@ -19,16 +19,20 @@ function globImport({include, exclude, debug} = {}) {
 	return {
 		name: 'glob-import',
 		async resolveId(importee, importer) {
-			if (!filter(importee) || importee.indexOf('*') < 0) {
+			console.log('importee:', importee);
+			if (!filter(importee) || !importee.includes('*')) {
 				return null;
 			}
-			const dir = path.dirname(importer);
-			const files = await glob(path.join(dir, importee));
+			if (!path.isAbsolute(importee)) {
+				const dir = path.dirname(importer);
+				importee = path.join(dir, importee);
+			}
+			const files = await glob(importee);
 			const code = files
 			.map((file) => {
-				return `import './${path.relative(dir, file)}'`;
+				return `import '${file}'`;
 			}).join('\n');
-			const id = path.join(dir, getPseudoName(importee));
+			const id = path.join(__dirname, getPseudoName(importee));
 			if (debug) {
 				console.info(`${importee}\n${code}`);
 			}
