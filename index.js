@@ -1,7 +1,5 @@
 const path = require('path');
 const promisify = require('j1/promisify');
-const acorn = require('acorn');
-const walk = require('acorn/dist/walk');
 const {createFilter} = require('rollup-pluginutils');
 const glob = promisify(require('glob'));
 
