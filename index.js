@@ -1,5 +1,5 @@
 const path = require('path');
-const promisify = require('j1/promisify');
+const {promisify} = require('util');
 const {createFilter} = require('rollup-pluginutils');
 const glob = promisify(require('glob'));
 
