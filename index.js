@@ -1,42 +1,67 @@
 const path = require('path');
 const promisify = require('j1/promisify');
-const console = require('j1/console').create('globImport');
+const acorn = require('acorn');
+const walk = require('acorn/dist/walk');
 const {createFilter} = require('rollup-pluginutils');
 const glob = promisify(require('glob'));
 
-function getPseudoName(importeePatten) {
-	return importeePatten
-	.split(path.sep)
-	.join('_')
-	.replace(/[*.]/g, (char) => {
-		return char.codePointAt(0).toString(16);
-	});
-}
-
-function globImport({include, exclude, debug} = {}) {
+function globImport({include, exclude} = {}) {
 	const filter = createFilter(include, exclude);
-	const codes = new Map();
 	return {
 		name: 'glob-import',
-		async resolveId(importee, importer) {
-			if (!filter(importee) || importee.indexOf('*') < 0) {
+		async transform(source, id) {
+			if (!filter(id)) {
 				return null;
 			}
-			const dir = path.dirname(importer);
-			const files = await glob(path.join(dir, importee));
-			const code = files
-			.map((file) => {
-				return `import './${path.relative(dir, file)}'`;
-			}).join('\n');
-			const id = path.join(dir, getPseudoName(importee));
-			if (debug) {
-				console.info(`${importee}\n${code}`);
+			const globImports = [];
+			const ast = acorn.parse(source, {
+				sourceType: 'module',
+			});
+			walk.simple(ast, {
+				ImportDeclaration({
+					specifiers: {length},
+					source: {type, value: from},
+					start,
+					end,
+				}) {
+					if (length === 0 && type === 'Literal' && from.includes('*')) {
+						globImports.push({
+							start,
+							end,
+							from,
+						});
+					}
+				}
+			});
+			if (0 < globImports.length) {
+				const baseDir = path.dirname(id);
+				globImports
+				.sort(({start: a}, {start: b}) => {
+					return a < b ? 1 : -1;
+				});
+				for (const {from, start, end} of globImports) {
+					const isAbsolute = path.isAbsolute(from);
+					const files = await glob(
+						isAbsolute
+						? from
+						: path.join(baseDir, from)
+					);
+					source = [
+						source.slice(0, start),
+						files
+						.map((file) => {
+							return `import '${
+								isAbsolute
+								? file
+								: `./${path.relative(baseDir, file)}`
+							}';`;
+						})
+						.join('\n'),
+						source.slice(end),
+					].join('');
+				}
+				return source;
 			}
-			codes.set(id, code);
-			return id;
-		},
-		load(id) {
-			return codes.get(id);
 		}
 	};
 }

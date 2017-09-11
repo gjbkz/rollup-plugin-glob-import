@@ -17,16 +17,17 @@
     "node": ">=7.6"
   },
   "scripts": {
-    "test": "node node_modules/j1/run test",
-    "test_coverage": "istanbul cover node_modules/j1/run test"
+    "test": "node node_modules/j1/run test/*/index.js",
+    "test_coverage": "istanbul cover node_modules/j1/run test/*/index.js"
   },
   "dependencies": {
+    "acorn": "^5.1.2",
     "glob": "^7.1.1",
     "j1": "0.0.36",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
     "istanbul": "^1.1.0-alpha.1",
-    "rollup": "^0.45.2"
+    "rollup": "^0.49.3"
   }
 }
