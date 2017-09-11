@@ -8,6 +8,7 @@ async function test(run) {
 
 	const input = path.join(__dirname, 'src', 'index.js');
 	const params = {};
+	const codes = new Map();
 
 	await run('bundle', async () => {
 		params.bundle = await rollup({
@@ -18,9 +19,26 @@ async function test(run) {
 						return source.split('__dirname').join(path.dirname(id));
 					}
 				},
-				globImport({debug: true})
+				globImport({debug: true}),
+				{
+					transform(source, id) {
+						codes.set(id, source);
+					}
+				}
 			]
 		});
+	});
+
+	await run('check expanded code', async () => {
+		assert.equal(
+			codes.get(input).trim(),
+			[
+				'import \'./deps1/a.js\';',
+				'import \'./deps1/b.js\';',
+				`import \'${__dirname}/src/deps2/c.js\';`,
+				`import \'${__dirname}/src/deps2/d.js\';`,
+			].join('\n')
+		);
 	});
 
 	await run('generate code', async () => {

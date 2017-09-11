@@ -40,8 +40,9 @@ function globImport({include, exclude} = {}) {
 					return a < b ? 1 : -1;
 				});
 				for (const {from, start, end} of globImports) {
+					const isAbsolute = path.isAbsolute(from);
 					const files = await glob(
-						path.isAbsolute(from)
+						isAbsolute
 						? from
 						: path.join(baseDir, from)
 					);
@@ -49,7 +50,11 @@ function globImport({include, exclude} = {}) {
 						source.slice(0, start),
 						files
 						.map((file) => {
-							return `import '${file}';`;
+							return `import '${
+								isAbsolute
+								? file
+								: `./${path.relative(baseDir, file)}`
+							}';`;
 						})
 						.join('\n'),
 						source.slice(end),
