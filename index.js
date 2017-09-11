@@ -5,62 +5,50 @@ const walk = require('acorn/dist/walk');
 const {createFilter} = require('rollup-pluginutils');
 const glob = promisify(require('glob'));
 
+function getPseudoFileName(importee) {
+	return `${
+		importee
+		.replace(/\*/g, '-star-')
+		.replace(/[^\w-]/g, '_')
+	}.js`;
+}
+
 function globImport({include, exclude} = {}) {
 	const filter = createFilter(include, exclude);
+	const generatedCodes = new Map();
 	return {
 		name: 'glob-import',
-		async transform(source, id) {
-			if (!filter(id)) {
+		async resolveId(importee, importer) {
+			if (!filter(importee) || !importee.includes('*')) {
 				return null;
 			}
-			const globImports = [];
-			const ast = acorn.parse(source, {
-				sourceType: 'module',
-			});
-			walk.simple(ast, {
-				ImportDeclaration({
-					specifiers: {length},
-					source: {type, value: from},
-					start,
-					end,
-				}) {
-					if (length === 0 && type === 'Literal' && from.includes('*')) {
-						globImports.push({
-							start,
-							end,
-							from,
-						});
-					}
+			const importeeIsAbsolute = path.isAbsolute(importee);
+			const importerDirectory = path.dirname(importer);
+			const foundFiles = await glob(
+				importeeIsAbsolute
+				? importee
+				: path.join(importerDirectory, importee)
+			);
+			const code = foundFiles
+			.map(
+				importeeIsAbsolute
+				? (file) => {
+					return `import '${file}';`;
 				}
-			});
-			if (0 < globImports.length) {
-				const baseDir = path.dirname(id);
-				globImports
-				.sort(({start: a}, {start: b}) => {
-					return a < b ? 1 : -1;
-				});
-				for (const {from, start, end} of globImports) {
-					const isAbsolute = path.isAbsolute(from);
-					const files = await glob(
-						isAbsolute
-						? from
-						: path.join(baseDir, from)
-					);
-					source = [
-						source.slice(0, start),
-						files
-						.map((file) => {
-							return `import '${
-								isAbsolute
-								? file
-								: `./${path.relative(baseDir, file)}`
-							}';`;
-						})
-						.join('\n'),
-						source.slice(end),
-					].join('');
+				: (file) => {
+					return `import './${path.relative(importerDirectory, file)}';`;
 				}
-				return source;
+			)
+			.join('\n');
+			const pseudoPath = path.join(importerDirectory, getPseudoFileName(importee));
+			generatedCodes.set(pseudoPath, code);
+			return pseudoPath;
+		},
+		load(id) {
+			if (generatedCodes.has(id)) {
+				const code = generatedCodes.get(id);
+				generatedCodes.delete(id);
+				return code;
 			}
 		}
 	};
