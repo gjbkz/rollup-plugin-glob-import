@@ -37,8 +37,8 @@ async function test(run) {
 		assert.equal(
 			params.deps1.trim(),
 			[
-				'import \'./deps1/a.js\';',
-				'import \'./deps1/b.js\';',
+				`import './deps1/a.js';`,
+				`import './deps1/b.js';`,
 			].join('\n')
 		);
 	});
@@ -47,8 +47,8 @@ async function test(run) {
 		assert.equal(
 			params.deps2.trim(),
 			[
-				`import \'${__dirname}/src/deps2/c.js\';`,
-				`import \'${__dirname}/src/deps2/d.js\';`,
+				`import '${__dirname}/src/deps2/c.js';`,
+				`import '${__dirname}/src/deps2/d.js';`,
 			].join('\n')
 		);
 	});
