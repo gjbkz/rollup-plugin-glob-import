@@ -21,7 +21,7 @@ const {rollup} = require('rollup');
 const globImport = require('rollup-plugin-glob-import');
 
 return rollup({
-  entry: 'path/to/src',
+  input: 'path/to/input.js',
   plugins: [
     globImport()
   ]
@@ -34,26 +34,27 @@ return rollup({
 
 ## Example
 
-Suppose you have the following files and directories.
+Suppose you have the following files.
 
-- `src.js`
-- scripts
-    - `001.js`
-    - `002.js`
-    - `003.js`
-
-Where the `src.js` contains the following import.
+- `deps1/a.js`
+- `deps1/b.js`
+- `deps2/c.js`
+- `deps2/d.js`
+- `index.js`
 
 ```javascript
-import './scripts/*.js';
+// index.js
+import './deps1/*.js';
+import '/absolute/path/to/deps2/*.js';
 ```
 
-This plugin converts the import to following imports.
+The lines in `index.js` works as a code below.
 
 ```javascript
-import './scripts/001.js';
-import './scripts/002.js';
-import './scripts/003.js';
+import './deps1/a.js';
+import './deps1/b.js';
+import '/absolute/path/to/deps2/c.js';
+import '/absolute/path/to/deps2/d.js';
 ```
 
 Note: Use `import A`, not `import X from Y`.
