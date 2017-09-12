@@ -2,6 +2,7 @@ const path = require('path');
 const {promisify} = require('util');
 const {createFilter} = require('rollup-pluginutils');
 const glob = promisify(require('glob'));
+const toURLString = require('./toURLString');
 
 function getPseudoFileName(importee) {
 	return `${
@@ -31,10 +32,10 @@ function globImport({include, exclude} = {}) {
 			.map(
 				importeeIsAbsolute
 				? (file) => {
-					return `import '${file}';`;
+					return `import '${toURLString(file)}';`;
 				}
 				: (file) => {
-					return `import './${path.relative(importerDirectory, file)}';`;
+					return `import '${toURLString(path.relative(importerDirectory, file))}';`;
 				}
 			)
 			.join('\n');

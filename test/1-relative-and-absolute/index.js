@@ -5,6 +5,7 @@ async function test(run) {
 	const vm = require('vm');
 	const {rollup} = require('rollup');
 	const globImport = require('../..');
+	const toURLString = require('../../toURLString');
 
 	const input = path.join(__dirname, 'src', 'index.js');
 	const params = {};
@@ -15,7 +16,7 @@ async function test(run) {
 			plugins: [
 				{
 					transform(source, id) {
-						return source.split('__dirname').join(path.dirname(id));
+						return source.split('__dirname').join(toURLString(path.dirname(id)));
 					}
 				},
 				globImport({debug: true}),
@@ -47,8 +48,8 @@ async function test(run) {
 		assert.equal(
 			params.deps2.trim(),
 			[
-				`import '${__dirname}/src/deps2/c.js';`,
-				`import '${__dirname}/src/deps2/d.js';`,
+				`import '${toURLString(__dirname)}/src/deps2/c.js';`,
+				`import '${toURLString(__dirname)}/src/deps2/d.js';`,
 			].join('\n')
 		);
 	});
