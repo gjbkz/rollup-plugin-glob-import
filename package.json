@@ -4,6 +4,7 @@
   "description": "A rollup plugin to use glob-star.",
   "license": "MIT",
   "repository": "kei-ito/rollup-plugin-glob-import",
+  "main": "dist/index.js",
   "author": {
     "name": "Kei Ito",
     "email": "kei.itof@gmail.com",
@@ -17,14 +18,19 @@
     "node": ">=7.6"
   },
   "scripts": {
-    "test": "node node_modules/j1/run 'test/*/index.js'",
-    "test_coverage": "istanbul cover node_modules/j1/run 'test/*/index.js'"
+    "build": "node build",
+    "test": "node build && node node_modules/j1/run 'test/*/index.js'",
+    "test_coverage": "node build && istanbul cover node_modules/j1/run 'test/*/index.js'",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "glob": "^7.1.1",
+    "regenerator-runtime": "^0.11.0",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "istanbul": "^1.1.0-alpha.1",
     "j1": "0.0.39",
     "rollup": "^0.49.3"

@@ -5,7 +5,7 @@ async function test(run) {
 	const vm = require('vm');
 	const {rollup} = require('rollup');
 	const globImport = require('../..');
-	const toURLString = require('../../toURLString');
+	const toURLString = require('../../dist/toURLString');
 
 	const input = path.join(__dirname, 'src', 'index.js');
 	const params = {};
