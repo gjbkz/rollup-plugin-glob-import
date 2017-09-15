@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "node build",
-    "test": "node build && node node_modules/j1/run 'test/*/index.js'",
-    "test_coverage": "node build && istanbul cover node_modules/j1/run 'test/*/index.js'",
+    "test": "node node_modules/j1/run 'test/*/index.js'",
+    "test_coverage": "istanbul cover node_modules/j1/run 'test/*/index.js'",
     "prepublish": "npm run build"
   },
   "dependencies": {
