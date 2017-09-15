@@ -9,11 +9,13 @@ function build() {
 	const srcDirectory = path.join(projectRoot, 'src');
 	glob.sync(path.join(srcDirectory, '**', '*'), {nodir: true})
 	.forEach((file) => {
-		console.log(path.relative(projectRoot, file));
 		const dest = path.join(projectRoot, 'dist', path.relative(srcDirectory, file));
 		childProcess.execSync(`mkdir -p ${path.dirname(dest)}`);
 		const input = fs.readFileSync(file);
-		if (path.extname(file) === '.js') {
+		if (/test.*src/.test(file)) {
+			fs.writeFileSync(dest, input);
+		} else {
+			console.log(path.relative(projectRoot, file));
 			const code = babel.transform([
 				'import "babel-polyfill";',
 				input.toString('utf8')
@@ -22,8 +24,6 @@ function build() {
 				useBuiltIns: true
 			}]]}).code;
 			fs.writeFileSync(dest, code);
-		} else {
-			fs.writeFileSync(dest, input);
 		}
 	});
 }
