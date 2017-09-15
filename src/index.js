@@ -1,7 +1,6 @@
 const path = require('path');
-const {promisify} = require('util');
 const {createFilter} = require('rollup-pluginutils');
-const glob = promisify(require('glob'));
+const glob = require('glob');
 const toURLString = require('./toURLString');
 
 function getPseudoFileName(importee) {
@@ -23,11 +22,20 @@ function globImport({include, exclude} = {}) {
 			}
 			const importeeIsAbsolute = path.isAbsolute(importee);
 			const importerDirectory = path.dirname(importer);
-			const foundFiles = await glob(
-				importeeIsAbsolute
-				? importee
-				: path.join(importerDirectory, importee)
-			);
+			const foundFiles = await new Promise((resolve, reject) => {
+				glob(
+					importeeIsAbsolute
+					? importee
+					: path.join(importerDirectory, importee),
+					(error, files) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve(files);
+						}
+					}
+				);
+			});
 			const code = foundFiles
 			.map(
 				importeeIsAbsolute
