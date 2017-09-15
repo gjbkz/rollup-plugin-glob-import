@@ -1,7 +1,7 @@
 function test(run) {
 
 	const assert = require('assert');
-	const toURLString = require('../../dist/toURLString');
+	const toURLString = require('../../toURLString');
 
 	run('slash', (run) => {
 

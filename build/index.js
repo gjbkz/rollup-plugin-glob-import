@@ -3,6 +3,7 @@ const fs = require('fs');
 const $console = require('j1/console').create('build');
 const promisify = require('j1/promisify');
 const writeFile = require('j1/writeFile');
+const cp = require('j1/cp');
 const glob = promisify(require('glob'));
 const readFile = promisify(fs.readFile, fs);
 const babel = require('babel-core');
@@ -13,16 +14,20 @@ async function build() {
 	const files = await glob(path.join(srcDirectory, '**', '*.js'));
 	for (const file of files) {
 		const console = $console.create(path.relative(projectRoot, file));
-		console.info('read');
-		const input = await readFile(file, 'utf8');
-		console.info('transpile');
-		const code = [
-			'require(\'regenerator-runtime/runtime\');',
-			babel.transform(input, {presets: [['env', {targets: {node: '4'}}]]}).code
-		].join('\n');
-		console.info('write');
 		const dest = path.join(projectRoot, 'dist', path.relative(srcDirectory, file));
-		await writeFile(dest, code);
+		if ((/test.*src/).test(file)) {
+			await cp(file, dest);
+		} else {
+			console.info('read');
+			const input = await readFile(file, 'utf8');
+			console.info('transpile');
+			const code = [
+				'require(\'regenerator-runtime/runtime\');',
+				babel.transform(input, {presets: [['env', {targets: {node: '4'}}]]}).code
+			].join('\n');
+			console.info('write');
+			await writeFile(dest, code);
+		}
 	}
 }
 
