@@ -1,28 +1,21 @@
 const path = require('path');
-const {createFilter} = require('rollup-pluginutils');
 const glob = require('glob');
+const createFilter = require('rollup-pluginutils').createFilter;
 const toURLString = require('./toURLString');
-
-function getPseudoFileName(importee) {
-	return `${
-		importee
-		.replace(/\*/g, '-star-')
-		.replace(/[^\w-]/g, '_')
-	}.js`;
-}
+const pseudoFileName = require('./pseudoFileName');
 
 function globImport({include, exclude} = {}) {
 	const filter = createFilter(include, exclude);
 	const generatedCodes = new Map();
 	return {
 		name: 'glob-import',
-		async resolveId(importee, importer) {
+		resolveId(importee, importer) {
 			if (!filter(importee) || !importee.includes('*')) {
 				return null;
 			}
 			const importeeIsAbsolute = path.isAbsolute(importee);
 			const importerDirectory = path.dirname(importer);
-			const foundFiles = await new Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
 				glob(
 					importeeIsAbsolute
 					? importee
@@ -35,21 +28,23 @@ function globImport({include, exclude} = {}) {
 						}
 					}
 				);
+			})
+			.then((foundFiles) => {
+				const code = foundFiles
+				.map(
+					importeeIsAbsolute
+					? (file) => {
+						return `import '${toURLString(file)}';`;
+					}
+					: (file) => {
+						return `import '${toURLString(path.relative(importerDirectory, file))}';`;
+					}
+				)
+				.join('\n');
+				const pseudoPath = path.join(importerDirectory, pseudoFileName(importee));
+				generatedCodes.set(pseudoPath, code);
+				return pseudoPath;
 			});
-			const code = foundFiles
-			.map(
-				importeeIsAbsolute
-				? (file) => {
-					return `import '${toURLString(file)}';`;
-				}
-				: (file) => {
-					return `import '${toURLString(path.relative(importerDirectory, file))}';`;
-				}
-			)
-			.join('\n');
-			const pseudoPath = path.join(importerDirectory, getPseudoFileName(importee));
-			generatedCodes.set(pseudoPath, code);
-			return pseudoPath;
 		},
 		load(id) {
 			if (generatedCodes.has(id)) {
