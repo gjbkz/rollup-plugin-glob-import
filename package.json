@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-glob-import",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A rollup plugin to use glob-star.",
   "license": "MIT",
   "repository": "kei-ito/rollup-plugin-glob-import",
