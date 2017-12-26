@@ -31,9 +31,7 @@ test('globImport', (test) => {
 					});
 				});
 				test('generate', () => {
-					return results.bundle.generate({
-						format: 'es',
-					})
+					return results.bundle.generate({format: 'es'})
 					.then(({code}) => {
 						results.code = code;
 					});
@@ -48,7 +46,7 @@ test('globImport', (test) => {
 						results.expected = JSON.parse(json);
 					});
 				});
-				test('assert the result', (test) => {
+				test('check the result', (test) => {
 					test.object(results.context.result, results.expected);
 				});
 			}
