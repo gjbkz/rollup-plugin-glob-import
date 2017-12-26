@@ -1,7 +1,6 @@
 const path = require('path');
 const {createFilter} = require('rollup-pluginutils');
-const promisify = require('@nlib/promisify');
-const glob = promisify(require('glob'));
+const glob = require('glob');
 
 module.exports = function globImport({include, exclude} = {}) {
 	const filter = createFilter(include, exclude);
@@ -13,7 +12,15 @@ module.exports = function globImport({include, exclude} = {}) {
 				return null;
 			}
 			const importerDirectory = path.dirname(importer);
-			return glob(importee, {cwd: importerDirectory})
+			return new Promise((resolve, reject) => {
+				glob(importee, {cwd: importerDirectory}, (error, files) => {
+					if (error) {
+						reject(error);
+					} else {
+						resolve(files);
+					}
+				});
+			})
 			.then((files) => {
 				const lines = [];
 				const namespaces = [];

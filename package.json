@@ -23,12 +23,12 @@
     "test_coverage": "nyc --reporter=lcov --reporter=text npm test"
   },
   "dependencies": {
-    "@nlib/promisify": "^1.0.1",
     "glob": "^7.1.2",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
     "@nlib/lint": "^2.2.1",
+    "@nlib/promisify": "^1.0.1",
     "@nlib/test": "^1.2.2",
     "rollup": "^0.53.0"
   }
