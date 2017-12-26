@@ -45,16 +45,23 @@ Suppose you have the following files.
 ```javascript
 // index.js
 import './deps1/*.js';
-import '/absolute/path/to/deps2/*.js';
+import * as foo from './deps2/*.js';
 ```
 
-The lines in `index.js` works as a code below.
+This plugin creates intermediate files if the module name includes "*".
 
 ```javascript
-import './deps1/a.js';
-import './deps1/b.js';
-import '/absolute/path/to/deps2/c.js';
-import '/absolute/path/to/deps2/d.js';
+// intermediate file for './deps1/*.js'
+export * from './deps1/a.js';
+export * from './deps1/b.js';
 ```
 
-Note: Use `import A`, not `import X from Y`.
+```javascript
+// intermediate file for './deps2/*.js'
+export * from './deps2/c.js';
+export * from './deps2/d.js';
+```
+
+## License
+
+MIT
