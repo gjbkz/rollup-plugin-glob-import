@@ -18,16 +18,16 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "node node_modules/j1/run 'test/*/index.js'",
-    "test_coverage": "istanbul cover node_modules/j1/run 'test/*/index.js'"
+    "lint": "nlib-lint src test/*.js",
+    "test": "node test",
+    "test_coverage": "nyc --reporter=lcov --reporter=text npm test"
   },
   "dependencies": {
     "glob": "^7.1.2",
     "rollup-pluginutils": "^2.0.1"
   },
   "devDependencies": {
-    "istanbul": "^1.1.0-alpha.1",
-    "j1": "0.0.47",
-    "rollup": "^0.50.0"
+    "@nlib/lint": "^2.2.1",
+    "@nlib/test": "^1.2.2"
   }
 }
