@@ -1,10 +1,9 @@
 const path = require('path');
-const glob = require('glob');
-const createFilter = require('rollup-pluginutils').createFilter;
-const toURLString = require('./toURLString');
-const pseudoFileName = require('./pseudoFileName');
+const {createFilter} = require('rollup-pluginutils');
+const promisify = require('@nlib/promisify');
+const glob = promisify(require('glob'));
 
-function globImport({include, exclude} = {}) {
+module.exports = function globImport({include, exclude} = {}) {
 	const filter = createFilter(include, exclude);
 	const generatedCodes = new Map();
 	return {
@@ -13,37 +12,20 @@ function globImport({include, exclude} = {}) {
 			if (!filter(importee) || !importee.includes('*')) {
 				return null;
 			}
-			const importeeIsAbsolute = path.isAbsolute(importee);
 			const importerDirectory = path.dirname(importer);
-			return new Promise((resolve, reject) => {
-				glob(
-					importeeIsAbsolute
-					? importee
-					: path.join(importerDirectory, importee),
-					(error, files) => {
-						if (error) {
-							reject(error);
-						} else {
-							resolve(files);
-						}
-					}
-				);
-			})
-			.then((foundFiles) => {
-				const code = foundFiles
-				.map(
-					importeeIsAbsolute
-					? (file) => {
-						return `import '${toURLString(file)}';`;
-					}
-					: (file) => {
-						return `import '${toURLString(path.relative(importerDirectory, file))}';`;
-					}
-				)
-				.join('\n');
-				const pseudoPath = path.join(importerDirectory, pseudoFileName(importee));
-				generatedCodes.set(pseudoPath, code);
-				return pseudoPath;
+			return glob(importee, {cwd: importerDirectory})
+			.then((files) => {
+				const lines = [];
+				const namespaces = [];
+				for (let i = 0; i < files.length; i++) {
+					const file = files[i];
+					const namespace = `_${i}`;
+					namespaces.push(namespace);
+					lines.push(`export * from ${JSON.stringify(file)};`);
+				}
+				const tempPath = path.join(importerDirectory, importee.replace(/\W/g, (c) => `_${c.codePointAt(0)}_`));
+				generatedCodes.set(tempPath, lines.join('\n'));
+				return tempPath;
 			});
 		},
 		load(id) {
@@ -52,8 +34,7 @@ function globImport({include, exclude} = {}) {
 				generatedCodes.delete(id);
 				return code;
 			}
-		}
+			return null;
+		},
 	};
-}
-
-module.exports = globImport;
+};
