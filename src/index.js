@@ -22,16 +22,9 @@ module.exports = function globImport({include, exclude} = {}) {
 				});
 			})
 			.then((files) => {
-				const lines = [];
-				const namespaces = [];
-				for (let i = 0; i < files.length; i++) {
-					const file = files[i];
-					const namespace = `_${i}`;
-					namespaces.push(namespace);
-					lines.push(`export * from ${JSON.stringify(file)};`);
-				}
 				const tempPath = path.join(importerDirectory, importee.replace(/\W/g, (c) => `_${c.codePointAt(0)}_`));
-				generatedCodes.set(tempPath, lines.join('\n'));
+				const code = files.map((file) => `export * from ${JSON.stringify(file)};`).join('\n');
+				generatedCodes.set(tempPath, code);
 				return tempPath;
 			});
 		},
