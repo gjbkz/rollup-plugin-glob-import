@@ -83,15 +83,15 @@ export {_0 as d};
 - `options.include` and `options.exclude` are passed to [`rollup-pluginutils.createfilter`](https://github.com/rollup/rollup-pluginutils#createfilter).
 - `options.format` specifies the format of intermediate files.
   The default value is `mixed`. Select others to skip [acorn](https://www.npmjs.com/package/acorn) parsing.
-  - `named`:
+  - `"named"`:
   The intermediate files export only **named** exports.
-  - `default`:
+  - `"default"`:
   The intermediate files export only **default** exports.
-  - `mixed`:
+  - `"mixed"`:
   This plugin read the imported files and parse it with [acorn](https://www.npmjs.com/package/acorn) to check default exports.
   Intermediate files export both named exports and default exports.
-- `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn). It is used if `options.format` is 'mixed'. The default value is `{sourceType: 'module'}`.
-- `options.defaultExport` is a function(*file*) → *identifier* to determine the name of default exports. It is used if `options.format` is 'mixed' or 'default'. The default value is a function extracts basename of file and coverts it to the camelCase style ([src/index.js](https://github.com/kei-ito/rollup-plugin-glob-import/blob/master/src/index.js#L10)).
+- `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn). It is used if `options.format` is `"mixed"`. The default value is `{sourceType: "module"}`.
+- `options.defaultExport` is a function(*file*) → *identifier* to determine the name of default exports. It is used if `options.format` is `"mixed"` or `"default"`. The default value is a function extracts basename of file and coverts it to the camelCase style ([src/index.js](https://github.com/kei-ito/rollup-plugin-glob-import/blob/master/src/index.js#L10)).
 
 
 ## License
