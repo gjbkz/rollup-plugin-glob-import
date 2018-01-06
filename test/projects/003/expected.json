@@ -1,0 +1,14 @@
+[
+  {
+    "aa": "aa",
+    "aFoo": "a",
+    "bb": "bb",
+    "bBar": "b"
+  },
+  {
+    "cc": "cc",
+    "cFooBar": "c",
+    "dd": "dd",
+    "dFoobar": "d"
+  }
+]
