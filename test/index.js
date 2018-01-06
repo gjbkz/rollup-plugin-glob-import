@@ -1,3 +1,4 @@
+const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
 const rollup = require('rollup');
@@ -57,6 +58,11 @@ test('globImport', (test) => {
 					}
 				});
 			}
+		});
+	});
+	test('invalid format', () => {
+		assert.throws(() => {
+			globImport({format: 'foo'});
 		});
 	});
 });
