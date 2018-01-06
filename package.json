@@ -30,7 +30,7 @@
   "devDependencies": {
     "@nlib/lint": "^2.2.1",
     "@nlib/promisify": "^1.0.1",
-    "@nlib/test": "^1.2.2",
-    "rollup": "^0.53.0"
+    "@nlib/test": "^1.2.3",
+    "rollup": "^0.53.3"
   }
 }
