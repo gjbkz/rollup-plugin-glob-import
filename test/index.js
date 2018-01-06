@@ -6,7 +6,6 @@ const test = require('@nlib/test');
 const {runInNewContext} = require('vm');
 const promisify = require('@nlib/promisify');
 const readdir = promisify(fs.readdir);
-const readFile = promisify(fs.readFile);
 const globImport = require('..');
 
 test('globImport', (test) => {
