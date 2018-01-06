@@ -23,7 +23,7 @@ const globImport = require('rollup-plugin-glob-import');
 return rollup({
   input: 'path/to/input.js',
   plugins: [
-    globImport()
+    globImport(options) // See the "Options" section below.
   ]
 })
 .then((bundle) => {
@@ -46,6 +46,20 @@ Suppose you have the following files.
 // index.js
 import './deps1/*.js';
 import * as foo from './deps2/*.js';
+
+// a.js
+export const aa = 'aa';
+
+// b.js
+export const bb = 'bb';
+export default 'b';
+
+// c.js
+export const cc = 'cc';
+
+// d.js
+export const dd = 'dd';
+export default 'd';
 ```
 
 This plugin creates intermediate files if the module name includes "*".
@@ -54,13 +68,31 @@ This plugin creates intermediate files if the module name includes "*".
 // intermediate file for './deps1/*.js'
 export * from './deps1/a.js';
 export * from './deps1/b.js';
-```
+import _0 from './deps1/b.js';
+export {_0 as b};
 
-```javascript
 // intermediate file for './deps2/*.js'
 export * from './deps2/c.js';
 export * from './deps2/d.js';
+import _0 from './deps2/d.js';
+export {_0 as d};
 ```
+
+## Options
+
+- `options.include` and `options.exclude` are passed to [`rollup-pluginutils.createfilter`](https://github.com/rollup/rollup-pluginutils#createfilter).
+- `options.format` specifies the format of intermediate files.
+  The default value is `mixed`. Select others to skip [acorn](https://www.npmjs.com/package/acorn) parsing.
+  - `named`:
+  The intermediate files export only **named** exports.
+  - `default`:
+  The intermediate files export only **default** exports.
+  - `mixed`:
+  This plugin read the imported files and parse it with [acorn](https://www.npmjs.com/package/acorn) to check default exports.
+  Intermediate files export both named exports and default exports.
+- `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn). It is used if `options.format` is 'mixed'. The default value is `{sourceType: 'module'}`.
+- `options.defaultExport` is a function(*file*) → *identifier* to determine the name of default exports. It is used if `options.format` is 'mixed' or 'default'. The default value is a function extracts basename of file and coverts it to the camelCase style ([src/index.js](https://github.com/kei-ito/rollup-plugin-glob-import/blob/master/src/index.js#L10)).
+
 
 ## License
 
