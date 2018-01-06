@@ -30,7 +30,6 @@ module.exports = function generate(files, importer, options) {
 			.map((file, index) => [
 				`import _${index} from ${JSON.stringify(file)};`,
 				`export {_${index} as ${options.defaultExport(file)}};`,
-				`export * from ${JSON.stringify(file)};`,
 			].join('\n')),
 			...files.map((file) => `export * from ${JSON.stringify(file)};`),
 		].join('\n');

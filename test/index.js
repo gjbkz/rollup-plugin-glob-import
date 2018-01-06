@@ -45,14 +45,8 @@ test('globImport', (test) => {
 								results.context = {};
 								runInNewContext(results.code, results.context);
 							});
-							test('load expected result', () => {
-								return readFile(path.join(directory, 'expected.json'), 'utf8')
-								.then((json) => {
-									results.expected = JSON.parse(json);
-								});
-							});
 							test('check the result', (test) => {
-								test.object(results.context.result, results.expected);
+								test.object(results.context.result, require(`./projects/${name}/expected`));
 							});
 						});
 					}
