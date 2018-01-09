@@ -1,8 +1,10 @@
-const defaultExports = require('./default');
-const namedExports = require('./named');
-const mixedExports = require('./mixed');
+const defaultFormat = require('./default');
+const namedFormat = require('./named');
+const mixedFormat = require('./mixed');
+const importFormat = require('./import');
 module.exports = {
-	default: defaultExports,
-	named: namedExports,
-	mixed: mixedExports,
+	default: defaultFormat,
+	named: namedFormat,
+	mixed: mixedFormat,
+	import: importFormat,
 };

@@ -3,4 +3,5 @@ module.exports = [
 	{},
 	{format: 'mixed'},
 	{format: 'named'},
+	{format: 'import'},
 ];
