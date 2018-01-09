@@ -83,6 +83,8 @@ export {_0 as d};
 - `options.include` and `options.exclude` are passed to [`rollup-pluginutils.createfilter`](https://github.com/rollup/rollup-pluginutils#createfilter).
 - `options.format` specifies the format of intermediate files.
   The default value is `mixed`. Select others to skip [acorn](https://www.npmjs.com/package/acorn) parsing.
+  - `"import"`:
+  The intermediate files work as importer that export nothing.
   - `"named"`:
   The intermediate files export only **named** exports.
   - `"default"`:
