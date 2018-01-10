@@ -44,12 +44,7 @@ module.exports = function globImport(options = {}) {
 			});
 		},
 		load(id) {
-			if (generatedCodes.has(id)) {
-				const code = generatedCodes.get(id);
-				generatedCodes.delete(id);
-				return code;
-			}
-			return null;
+			return generatedCodes.get(id);
 		},
 	};
 };
