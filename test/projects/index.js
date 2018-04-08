@@ -45,7 +45,7 @@ test('projects', (test) => {
 							});
 						});
 						test('run the code', () => {
-							results.context = {};
+							results.context = {result: []};
 							runInNewContext(results.code, results.context);
 						});
 						test('check the result', (test) => {
