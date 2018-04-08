@@ -41,6 +41,9 @@ test('projects', (test) => {
 						test('generate', () => {
 							return results.bundle.generate({format: 'es'})
 							.then(({code}) => {
+								if (!code.trim()) {
+									throw new Error('empty code');
+								}
 								results.code = code;
 							});
 						});
