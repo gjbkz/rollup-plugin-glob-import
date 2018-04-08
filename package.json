@@ -33,6 +33,6 @@
     "@nlib/promisify": "^1.0.1",
     "@nlib/rm": "^1.0.0",
     "@nlib/test": "^1.2.3",
-    "rollup": "^0.53.3"
+    "rollup": "^0.57.1"
   }
 }
