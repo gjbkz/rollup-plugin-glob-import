@@ -81,11 +81,11 @@ test('watch', (test) => {
 							});
 						});
 						test('run the code', () => {
-							results.context = {};
+							results.context = {result: []};
 							runInNewContext(results.code, results.context);
 						});
 						test('check the result', (test) => {
-							test.object(results.context.result, require(`./${name}/expected`));
+							test.compare(results.context.result, require(`./${name}/expected`));
 						});
 						test('close', () => {
 							if (results.watcher) {

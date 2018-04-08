@@ -41,15 +41,18 @@ test('projects', (test) => {
 						test('generate', () => {
 							return results.bundle.generate({format: 'es'})
 							.then(({code}) => {
+								if (!code.trim()) {
+									throw new Error('empty code');
+								}
 								results.code = code;
 							});
 						});
 						test('run the code', () => {
-							results.context = {};
+							results.context = {result: []};
 							runInNewContext(results.code, results.context);
 						});
 						test('check the result', (test) => {
-							test.object(results.context.result, require(`./${name}/expected`));
+							test.compare(results.context.result, require(`./${name}/expected`));
 						});
 					});
 				}
