@@ -16,66 +16,21 @@ npm install --save-dev rollup-plugin-glob-import
 ## Usage
 
 ```javascript
-const {rollup} = require('rollup');
+// rollup.config.js
 const globImport = require('rollup-plugin-glob-import');
-
-return rollup({
+export default {
   input: 'path/to/input.js',
   plugins: [
     globImport(options) // See the "Options" section below.
   ]
-})
-.then((bundle) => {
-  const {code} = bundle.generate({format: 'es'});
-  fs.writeFileSync('path/to/dest', code);
-});
+}
 ```
 
 ## Example
 
-Suppose you have the following files.
-
-- `deps1/a.js`
-- `deps1/b.js`
-- `deps2/c.js`
-- `deps2/d.js`
-- `index.js`
-
-```javascript
-// index.js
-import './deps1/*.js';
-import * as foo from './deps2/*.js';
-
-// a.js
-export const aa = 'aa';
-
-// b.js
-export const bb = 'bb';
-export default 'b';
-
-// c.js
-export const cc = 'cc';
-
-// d.js
-export const dd = 'dd';
-export default 'd';
-```
-
-This plugin creates intermediate files if the module name includes "*".
-
-```javascript
-// intermediate file for './deps1/*.js'
-export * from './deps1/a.js';
-export * from './deps1/b.js';
-import _0 from './deps1/b.js';
-export {_0 as b};
-
-// intermediate file for './deps2/*.js'
-export * from './deps2/c.js';
-export * from './deps2/d.js';
-import _0 from './deps2/d.js';
-export {_0 as d};
-```
+- [sample/001](sample/001): Import named exports
+- [sample/002](sample/002): Import all exports including default exports
+- [sample/003](sample/003): Import side effects
 
 ## Options
 
