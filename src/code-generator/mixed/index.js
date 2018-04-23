@@ -19,7 +19,13 @@ module.exports = function generate(files, importer, options) {
 			const namedExports = [];
 			for (const node of acorn.parse(code, acornOptions).body) {
 				const {type} = node;
-				if (type === 'ExportDefaultDeclaration') {
+				if (type === 'ExportAllDeclaration') {
+					let from = node.source.value;
+					if (from.startsWith('.')) {
+						from = `./${path.join(path.dirname(file), from).split(path.sep).join('/')}`;
+					}
+					lines.push(`export * from ${JSON.stringify(from)};`);
+				} else if (type === 'ExportDefaultDeclaration') {
 					lines.push(`import _${index} from ${JSON.stringify(file)};`);
 					lines.push(`export {_${index} as ${options.rename(null, file)}};`);
 				} else if (type === 'ExportNamedDeclaration') {

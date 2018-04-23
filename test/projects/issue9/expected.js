@@ -6,6 +6,5 @@ module.exports = [
 		cp1251: (value) => typeof value === 'function',
 		otherStuff1250: 'encode:1250',
 		otherStuff1251: 'encode:1251',
-		conflictStuff: 'conflictName1250',
 	},
 ];

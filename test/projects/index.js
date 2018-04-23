@@ -23,7 +23,7 @@ test('projects', (test) => {
 		});
 	});
 	test('test projects', (test) => {
-		for (const name of projects.slice(0, 1)) {
+		for (const name of projects) {
 			test(name, (test) => {
 				const directory = path.join(__dirname, name);
 				for (const options of require(`./${name}/options.js`)) {
