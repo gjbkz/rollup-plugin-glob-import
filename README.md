@@ -31,6 +31,7 @@ export default {
 - [sample/001](sample/001): Import named exports
 - [sample/002](sample/002): Import all exports including default exports
 - [sample/003](sample/003): Import side effects
+- [sample/004](sample/004): Use options.rename
 
 ## Options
 
