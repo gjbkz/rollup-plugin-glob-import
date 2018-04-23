@@ -49,8 +49,8 @@ export default {
   Intermediate files export both named exports and default exports.
 - `options.rename` is a function(*name*, *id*) → *identifier* to determine the name of exports.
   It is used if `options.format` is `"mixed"` or `"default"`.
-  For example, f an imported module `/src/foo.js` has `export const bar = 100`,
-  it is called once with ('bar', '/src/foo.js').
+  For example, if an imported module `/src/foo.js` has `export const bar = 123` and `export default 456`,
+  it is called twice: rename('bar', '/src/foo.js'), rename(null, '/src/foo.js').
 - `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn).
   It is used if `options.rename` is set. The default value is `{sourceType: "module"}`.
 
