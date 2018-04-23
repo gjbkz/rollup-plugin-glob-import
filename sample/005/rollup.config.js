@@ -4,7 +4,7 @@ module.exports = {
 	input: 'input.js',
 	plugins: [globImport({
 		rename(name, id) {
-			return name || path.relative(__dirname, id).replace(/[^\w]/g, '_');
+			return `${path.relative(__dirname, id)}/${name}`.replace(/[^\w]/g, '_');
 		},
 	})],
 	output: {

@@ -36,6 +36,8 @@ var x = /*#__PURE__*/Object.freeze({
 	ee: ee,
 	ff: ff,
 	cc: cc,
+	c1: cc,
+	c2: cc,
 	dd: dd
 });
 

@@ -2,18 +2,19 @@ const path = require('path');
 const {createFilter} = require('rollup-pluginutils');
 const glob = require('glob');
 const codeGenerator = require('./code-generator');
+const defaultRenamer = (name, id) => {
+	return name || path.basename(id, path.extname(id)).replace(/[-+*/:;.'"`?!&~|<>^%#=@[\]{}()\s\\]+([a-z]|$)/g, (match, c) => c.toUpperCase());
+};
 
 module.exports = function globImport(options = {}) {
 	options = Object.assign(
-		{
-			format: 'mixed',
-			defaultExport(file) {
-				return path.basename(file, path.extname(file))
-				.replace(/[-+*/:;.'"`?!&~|<>^%#=@[\]{}()\s\\]+([a-z]|$)/g, (match, c) => c.toUpperCase());
-			},
-		},
+		{format: 'mixed'},
 		options
 	);
+	if (options.rename && options.format !== 'default') {
+		options.format = 'mixed';
+	}
+	options.rename = options.rename || defaultRenamer;
 	const generateCode = codeGenerator[options.format];
 	if (!generateCode) {
 		throw new Error(`Invalid format: ${options.format}`);
