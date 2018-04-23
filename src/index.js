@@ -11,7 +11,7 @@ module.exports = function globImport(options = {}) {
 		{format: 'mixed'},
 		options
 	);
-	if (options.rename) {
+	if (options.rename && options.format !== 'default') {
 		options.format = 'mixed';
 	}
 	options.rename = options.rename || defaultRenamer;
