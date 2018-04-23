@@ -3,7 +3,7 @@ module.exports = {
 	input: 'input.js',
 	plugins: [globImport({
 		rename(name, id) {
-			return name || id.replace(/[^\w]/g, '_');
+			return `${id}/${name}`.replace(/[^\w]/g, '_');
 		},
 	})],
 	output: {
