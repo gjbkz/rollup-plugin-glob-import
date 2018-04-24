@@ -37,7 +37,7 @@ module.exports = function generate(files, importer, options) {
 						namedExports.push(specifier.exported.name);
 					}
 					if (node.declaration) {
-						for (const declaration of node.declaration.declarations) {
+						for (const declaration of node.declaration.declarations || [node.declaration]) {
 							namedExports.push(declaration.id.name);
 						}
 					}
