@@ -1,8 +1,5 @@
 {
-  "globals": {
-    "result": true
-  },
-  "rules": {
-    "global-require": "off"
-  }
+	"rules": {
+		"global-require": "off"
+	}
 }
