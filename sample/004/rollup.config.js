@@ -5,6 +5,9 @@ module.exports = {
 	plugins: [
 		globImport({
 			rename(name, id) {
+				if (path.basename(id) === 'f.js') {
+					return null;
+				}
 				return `${path.relative(__dirname, id)}/${name}`.replace(/[^\w]/g, '_');
 			},
 		}),

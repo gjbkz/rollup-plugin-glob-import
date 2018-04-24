@@ -1,3 +1,3 @@
 module.exports = [
-	{format: 'default'},
+	{format: 'mixed'},
 ];

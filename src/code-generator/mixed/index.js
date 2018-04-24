@@ -27,8 +27,11 @@ module.exports = function generate(files, importer, options) {
 					}
 					lines.push(`export * from ${JSON.stringify(from)};`);
 				} else if (type === 'ExportDefaultDeclaration') {
-					lines.push(`import _${index} from ${JSON.stringify(file)};`);
-					lines.push(`export {_${index} as ${options.rename(null, id)}};`);
+					const exported = options.rename(null, id);
+					if (exported) {
+						lines.push(`import _${index} from ${JSON.stringify(file)};`);
+						lines.push(`export {_${index} as ${exported}};`);
+					}
 				} else if (type === 'ExportNamedDeclaration') {
 					for (const specifier of node.specifiers) {
 						namedExports.push(specifier.exported.name);
@@ -40,8 +43,15 @@ module.exports = function generate(files, importer, options) {
 					}
 				}
 			}
-			if (0 < namedExports.length) {
-				lines.push(`export {${namedExports.map((name) => `${name} as ${options.rename(name, id)}`)}} from ${JSON.stringify(file)}`);
+			const nameMapping = [];
+			for (const name of namedExports) {
+				const exported = options.rename(name, id);
+				if (exported) {
+					nameMapping.push(`${name} as ${exported}`);
+				}
+			}
+			if (0 < nameMapping.length) {
+				lines.push(`export {${nameMapping.join(', ')}} from ${JSON.stringify(file)}`);
 			}
 			if (lines.length === 0) {
 				lines.push(`import ${JSON.stringify(file)};`);

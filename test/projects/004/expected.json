@@ -1,14 +1,10 @@
 [
   {
-    "aa": "aa",
     "a_foo_js": "a",
-    "bb": "bb",
     "b_bar_js": "b"
   },
   {
-    "cc": "cc",
     "c_foo_bar_js": "c",
-    "dd": "dd",
     "d_foobar_js": "d"
   }
 ]

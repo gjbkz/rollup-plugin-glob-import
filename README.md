@@ -51,6 +51,7 @@ export default {
   It is used if `options.format` is `"mixed"` or `"default"`.
   For example, if an imported module `/src/foo.js` has `export const bar = 123` and `export default 456`,
   it is called twice: rename('bar', '/src/foo.js'), rename(null, '/src/foo.js').
+  Exports that the `rename()` returns falsy value are ignored.
 - `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn).
   It is used if `options.rename` is set. The default value is `{sourceType: "module"}`.
 
