@@ -10,6 +10,8 @@
 
 	window.cc = 'cc';
 
+	window.ee = 'ee';
+
 	window.dd = 'dd';
 
 })));

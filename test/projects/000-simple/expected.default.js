@@ -29,4 +29,4 @@ module.exports = {
 		C5: undefined,
 		D5: undefined,
 	},
-}
+};

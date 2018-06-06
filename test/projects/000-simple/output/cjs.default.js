@@ -9,6 +9,8 @@ var b = 'b0';
 window.cc = 'cc';
 var c = 'c0';
 
+window.ee = 'ee';
+
 window.dd = 'dd';
 var d = 'd0';
 

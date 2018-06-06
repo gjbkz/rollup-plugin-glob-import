@@ -1,5 +1,5 @@
 const {rollup} = require('rollup');
-const test = require('@nlib/test');
+const t = require('tap');
 const rm = require('@nlib/rm');
 const {loadProjects} = require('./projects');
 const globImport = require('..');
@@ -29,26 +29,26 @@ const createSandbox = () => {
 	return sandbox;
 };
 
-test('globImport', (test) => {
+t.test('globImport', (t) => {
 
 	const projects = [];
 	const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
 	const importFormats = ['mixed', 'default', 'named', 'import'];
 
-	test('load projects', () => loadProjects().then((loaded) => projects.push(...loaded)));
+	t.test('load projects', () => loadProjects().then((loaded) => projects.push(...loaded)));
 
-	test('test projects', (test) => {
+	t.test('test projects', (t) => {
 
-		projects.forEach((project) => test(project.name, (test) => {
-			test('cleanup project/output', () => rm(project.path('output')));
+		projects.forEach((project) => t.test(project.name, (t) => {
+			t.test('cleanup project/output', () => rm(project.path('output')));
 			importFormats.forEach((importFormat) => {
-				test(importFormat, (test) => {
-					formats.forEach((format) => test(`${importFormat}/${format}`, (test) => {
+				t.test(importFormat, (t) => {
+					formats.forEach((format) => t.test(`${importFormat}/${format}`, (t) => {
 						const data = {
 							format,
 							importFormat,
 						};
-						test('rollup()', () => {
+						t.test('rollup()', () => {
 							return rollup({
 								input: project.path('src', `input.${importFormat}.js`),
 								plugins: [
@@ -61,29 +61,39 @@ test('globImport', (test) => {
 								data.bundle = bundle;
 							});
 						});
-						test('bundle.generate()', () => {
+						t.test('bundle.generate()', () => {
 							return data.bundle.generate({format})
 							.then((result) => Object.assign(data, result));
 						});
-						test(`output ${format}.${importFormat}.js`, () => {
+						t.test(`output ${format}.${importFormat}.js`, () => {
 							return project.writeFile(`${format}.${importFormat}.js`, data.code);
 						});
-						test('check modules', (test) => {
-							project.testModules(test, data);
+						t.test('check modules', (t) => {
+							project.testModules(t, data);
+							t.end();
 						});
-						test('run the generated code', () => {
+						t.test('run the generated code', (t) => {
 							data.sandbox = createSandbox();
 							runInNewContext(data.code, data.sandbox);
+							t.end();
 						});
-						test(`load expected.${importFormat}.js`, (test) => {
+						t.test(`load expected.${importFormat}.js`, (t) => {
 							data.expected = require(project.path(`expected.${importFormat}.js`));
-							test.compare(data.sandbox, data.expected);
+							t.match(data.sandbox, data.expected);
+							t.end();
 						});
+						t.end();
 					}));
+					t.end();
 				});
 			});
+			t.end();
 		}));
 
+		t.end();
+
 	});
+
+	t.end();
 
 });
