@@ -6,6 +6,8 @@ define(function () { 'use strict';
 
 	window.cc = 'cc';
 
+	window.ee = 'ee';
+
 	window.dd = 'dd';
 
 });

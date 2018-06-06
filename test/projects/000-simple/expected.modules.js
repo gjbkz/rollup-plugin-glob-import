@@ -1,5 +1,5 @@
 const path = require('path');
-module.exports = (test, {modules, importFormat}) => {
+module.exports = (t, {modules, importFormat}) => {
 	const actual = {};
 	for (const file of Object.keys(modules)) {
 		actual[path.relative(__dirname, file)] = true;
@@ -10,6 +10,7 @@ module.exports = (test, {modules, importFormat}) => {
 		[path.join('src', 'foo', 'b.js')]: true,
 		[path.join('src', 'foo', 'bar', 'c.js')]: true,
 		[path.join('src', 'foo', 'bar', 'd.js')]: true,
+		[path.join('src', 'baz', 'e.js')]: true,
 	};
-	test.compare(actual, expected);
+	t.match(actual, expected);
 };

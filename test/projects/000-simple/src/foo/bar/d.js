@@ -8,3 +8,4 @@ export class D5 {
 		return 'D5';
 	}
 }
+export * from '../../baz/**/*.js';

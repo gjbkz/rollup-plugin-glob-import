@@ -34,6 +34,16 @@
 		}
 	}
 
+	window.ee = 'ee';
+	var e = 'e0';
+	const e1 = 'e1';
+	function e2() {}
+	class E5 {
+		static get name() {
+			return 'E5';
+		}
+	}
+
 	window.dd = 'dd';
 	var d = 'd0';
 	const d1 = 'd1';
@@ -70,7 +80,13 @@
 		d2: d2,
 		d3: d1,
 		d4: d2,
-		D5: D5
+		D5: D5,
+		e: e,
+		e1: e1,
+		e2: e2,
+		e3: e1,
+		e4: e2,
+		E5: E5
 	});
 
 	window.result = x;
