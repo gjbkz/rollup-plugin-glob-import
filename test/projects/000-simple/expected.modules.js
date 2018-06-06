@@ -1,7 +1,7 @@
 const path = require('path');
 module.exports = (test, {modules, importFormat}) => {
 	const actual = {};
-	for (const file of modules) {
+	for (const file of Object.keys(modules)) {
 		actual[path.relative(__dirname, file)] = true;
 	}
 	const expected = {

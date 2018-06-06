@@ -1,12 +1,10 @@
 language: node_js
 node_js:
-- '9'
+- '10'
 - '8'
-- '7'
 - '6'
 install:
 - npm install
-- npm install -g nyc eslint
 script:
 - npm run test_coverage
 - npm run lint
