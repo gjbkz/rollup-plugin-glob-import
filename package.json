@@ -35,6 +35,6 @@
 		"@nlib/test": "^1.3.4",
 		"@nlib/util": "0.0.0",
 		"@nlib/write-file": "^1.0.1",
-		"rollup": "^0.59.0"
+		"rollup": "^0.60.0"
 	}
 }
