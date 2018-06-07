@@ -54,6 +54,9 @@ export default {
   Exports that the `rename()` returns falsy value are ignored.
 - `options.acorn` is passed to [acorn](https://www.npmjs.com/package/acorn).
   It is used if `options.rename` is set. The default value is `{sourceType: "module"}`.
+- `options.intercept` is a function(*sources*, *importer*, *importee*) → *new_sources*.
+  It is called before generating intermediate files.
+  Therefore you can add or remove items from *sources*.
 
 ## License
 

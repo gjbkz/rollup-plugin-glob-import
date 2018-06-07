@@ -1,3 +1,5 @@
+require('./intercept');
+require('./invalid-format');
 const {rollup} = require('rollup');
 const t = require('tap');
 const rm = require('@nlib/rm');
