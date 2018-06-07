@@ -33,10 +33,11 @@ module.exports = function globImport(options = {}) {
 					if (error) {
 						reject(error);
 					} else {
-						resolve(files);
+						resolve(files.sort());
 					}
 				});
 			})
+			.then((files) => options.intercept ? options.intercept(files, importee, importer) : files)
 			.then((files) => generateCode(files, importer, options))
 			.then((code) => {
 				const tempPath = path.join(importerDirectory, importee.replace(/\W/g, (c) => `_${c.codePointAt(0)}_`));
