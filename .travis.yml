@@ -3,12 +3,18 @@ node_js:
 - '10'
 - '8'
 - '6'
+before_install:
+- export GREENKEEPER=$([[ $(node -v) == v10.* ]]; echo $?)
+- [[ ${GREENKEEPER} -eq 0 ]] && npm install -g greenkeeper-lockfile
 install:
 - npm install
+before_script:
+- [[ ${GREENKEEPER} -eq 0 ]] && greenkeeper-lockfile-update
 script:
 - npm run test
 - npm run lint
 after_success:
+- [[ ${GREENKEEPER} -eq 0 ]] && greenkeeper-lockfile-upload
 - npm install -g codecov
 - codecov
 deploy:
@@ -20,3 +26,6 @@ deploy:
   on:
     tags: true
     repo: kei-ito/rollup-plugin-glob-import
+env:
+  global:
+    secure: Szhcv6WNRE/mtDHaoDOo+ZeDDFScyGa5FK1YSvqY2mIZJ0rb/PUdMn7OH3IymhyG/aghzvlXiZAyyslsEorOUxli/OGkdYzwVNdnRc/iBo+qbsTkHjYCTgz0oTPKjtBiD5zVrJhhzD7l6b1sCl/v9cbSswzsjK3JmV0RFOjBCqZrVqgGryTIj0eosbfojCHHb7qaLzLLo2bkfnpPmAPQN4onDAL5swbiECT3RrI3vjzhhSwpM2axPFe/QsYLdIaIgKkb5yyXrdhBPGIiv/OUzRJInMS7TEoxhMcZvFsBCf2Rolt3N8DNIa3wd7n2aB2M6tF6+XwNwBOyVMI2oJ/7uUes+KqvpogmtjmddjWPyXAyjGH2Li/7tgF4chsmgYF45jPvMEGNfU7yQdjl2jlwCdFy+5EUgJLmHmfEV5pgt0U9QjZ0s+AuQDUKuV6RfRLqHWcspC4FBpvMYxv+eaIDIsMrB48hg7sutfVODigQjmHQmVykK+fmePifmMXTPu2zSgg0ap9oEps9ClCOP88OkX+SjunEKSGhpbH7KmG7SnW9pDjZH/qLBQIy+mMPZa3y+4TmLU+mePs2sxUsQxjlKR5PLHme+aLaD3SDFiwMI/lCA8pFkiynxc6nL8SYxMosPuPYPNOMY0eJkPWhJTBQaukRgd0pQuQhMi0t8f6brFE=
