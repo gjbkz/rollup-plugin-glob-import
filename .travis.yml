@@ -5,16 +5,19 @@ node_js:
 - '6'
 before_install:
 - 'export GREENKEEPER=$([[ $(node -v) == v10.* ]]; echo $?)'
-- '[[ ${GREENKEEPER} -eq 0 ]] && npm install -g greenkeeper-lockfile'
+- if [[ ${GREENKEEPER} -eq 0 ]]; then
+    npm install -g greenkeeper-lockfile
 install:
 - npm install
 before_script:
-- '[[ ${GREENKEEPER} -eq 0 ]] && greenkeeper-lockfile-update'
+- if [[ ${GREENKEEPER} -eq 0 ]]; then
+    greenkeeper-lockfile-update
 script:
 - npm run test
 - npm run lint
 after_success:
-- '[[ ${GREENKEEPER} -eq 0 ]] && greenkeeper-lockfile-upload'
+- if [[ ${GREENKEEPER} -eq 0 ]]; then
+    greenkeeper-lockfile-upload
 - npm install -g codecov
 - codecov
 deploy:
