@@ -29,13 +29,13 @@
 	},
 	"devDependencies": {
 		"@nlib/cp": "^1.0.1",
-		"@nlib/lint": "^3.0.3",
+		"@nlib/lint": "^3.0.4",
 		"@nlib/rm": "^1.0.0",
-		"@nlib/util": "^0.1.1",
+		"@nlib/util": "^0.1.4",
 		"@nlib/write-file": "^1.0.1",
-		"eslint": "^5.0.0",
+		"eslint": "^5.3.0",
 		"nyc": "^12.0.2",
-		"rollup": "^0.62.0",
+		"rollup": "^0.64.1",
 		"tap": "^12.0.1"
 	}
 }
