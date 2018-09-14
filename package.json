@@ -23,7 +23,7 @@
 		"test": "tap --coverage test/index.js"
 	},
 	"dependencies": {
-		"acorn": "^5.5.3",
+		"acorn": "^6.0.1",
 		"glob": "^7.1.2",
 		"rollup-pluginutils": "^2.0.1"
 	},
