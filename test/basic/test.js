@@ -5,7 +5,7 @@ const {rollup} = require('rollup');
 const globImport = require('../..');
 const {runCode} = require('../util.js');
 
-t.test('globImport', async (t) => {
+t.test('basic', async (t) => {
     const directory = __dirname;
     const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
     const importFormats = ['mixed', 'default', 'named', 'import'];
