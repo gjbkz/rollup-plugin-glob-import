@@ -14,9 +14,3 @@ overrides:
       - 'test/*/src/**/*'
     rules:
       func-style: 'off'
-  -
-    files:
-      - 'src/index.js'
-    rules:
-      global-require: 'off'
-      max-lines-per-function: 'off'

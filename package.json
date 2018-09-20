@@ -4,7 +4,7 @@
     "description": "A rollup plugin to use glob-star.",
     "license": "MIT",
     "repository": "kei-ito/rollup-plugin-glob-import",
-    "main": "src/index.js",
+    "main": "lib/index.js",
     "author": {
         "name": "Kei Ito",
         "email": "kei.itof@gmail.com",
@@ -19,8 +19,8 @@
     },
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
-        "lint": "eslint --no-inline-config src test",
-        "test": "tap --coverage test/index.js"
+        "lint": "eslint --no-inline-config lib test",
+        "test": "tap --coverage test/*/test.js"
     },
     "dependencies": {
         "glob": "^7.1.2",
