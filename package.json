@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "glob": "^7.1.2",
-        "rollup-pluginutils": "^2.0.1"
+        "rollup-pluginutils": "^2.3.3"
     },
     "devDependencies": {
         "@nlib/afs": "^0.2.3",
