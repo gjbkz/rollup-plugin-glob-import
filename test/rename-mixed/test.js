@@ -1,5 +1,4 @@
 const path = require('path');
-const afs = require('@nlib/afs');
 const t = require('tap');
 const {rollup} = require('rollup');
 const globImport = require('../..');
@@ -8,7 +7,6 @@ const {runCode} = require('../util.js');
 t.test('rename-mixed', async (t) => {
     const directory = __dirname;
     const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
-    await afs.rmrf(path.join(directory, 'output'));
     for (const format of formats) {
         await t.test(format, async (t) => {
             const actual = [];
