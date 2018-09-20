@@ -1,41 +1,37 @@
 {
-	"name": "rollup-plugin-glob-import",
-	"version": "0.2.4",
-	"description": "A rollup plugin to use glob-star.",
-	"license": "MIT",
-	"repository": "kei-ito/rollup-plugin-glob-import",
-	"main": "src/index.js",
-	"author": {
-		"name": "Kei Ito",
-		"email": "kei.itof@gmail.com",
-		"url": "https://github.com/kei-ito"
-	},
-	"keywords": [
-		"rollup",
-		"glob"
-	],
-	"engines": {
-		"node": ">=6"
-	},
-	"scripts": {
-		"sample": "rollup --config sample/rollup.config.js",
-		"lint": "eslint --no-inline-config src test/*.js test/projects/*.js",
-		"test": "tap --coverage test/index.js"
-	},
-	"dependencies": {
-		"acorn": "^5.5.3",
-		"glob": "^7.1.2",
-		"rollup-pluginutils": "^2.0.1"
-	},
-	"devDependencies": {
-		"@nlib/cp": "^1.0.1",
-		"@nlib/lint": "^3.0.4",
-		"@nlib/rm": "^1.0.0",
-		"@nlib/util": "^0.1.4",
-		"@nlib/write-file": "^1.0.1",
-		"eslint": "^5.3.0",
-		"nyc": "^12.0.2",
-		"rollup": "^0.64.1",
-		"tap": "^12.0.1"
-	}
+    "name": "rollup-plugin-glob-import",
+    "version": "0.2.4",
+    "description": "A rollup plugin to use glob-star.",
+    "license": "MIT",
+    "repository": "kei-ito/rollup-plugin-glob-import",
+    "main": "lib/index.js",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
+    "keywords": [
+        "rollup",
+        "glob"
+    ],
+    "engines": {
+        "node": ">=8"
+    },
+    "scripts": {
+        "sample": "rollup --config sample/rollup.config.js",
+        "lint": "eslint --no-inline-config lib test",
+        "test": "tap --coverage test/*/test.js"
+    },
+    "dependencies": {
+        "glob": "^7.1.2",
+        "rollup-pluginutils": "^2.0.1"
+    },
+    "devDependencies": {
+        "@nlib/afs": "^0.2.3",
+        "@nlib/lint": "^3.0.6",
+        "@nlib/util": "^0.1.4",
+        "eslint": "^5.3.0",
+        "rollup": "^0.66.1",
+        "tap": "^12.0.1"
+    }
 }
