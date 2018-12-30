@@ -18,7 +18,7 @@ t.test('intercept', async (t) => {
             }),
         ],
     });
-    const {code} = await bundle.generate({format: 'es'});
+    const {output: [{code}]} = await bundle.generate({format: 'es'});
     const result = runCode(code);
     t.match(result, {
         foo: {
