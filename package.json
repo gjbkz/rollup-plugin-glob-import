@@ -20,7 +20,10 @@
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
         "lint": "eslint --no-inline-config lib test",
-        "test": "tap --coverage test/*/test.js"
+        "test": "tap --coverage test/*/test.js",
+        "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
+        "version:add": "git add .",
+        "version": "npm-run-all --sequential version:changelog version:add"
     },
     "dependencies": {
         "glob": "^7.1.3",
