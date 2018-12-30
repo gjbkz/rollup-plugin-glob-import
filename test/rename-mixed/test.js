@@ -25,8 +25,8 @@ t.test('rename-mixed', async (t) => {
                     }),
                 ],
             });
-            const output = await bundle.generate({format});
-            const result = runCode(output.code);
+            const {output: [{code}]} = await bundle.generate({format});
+            const result = runCode(code);
             t.equal(result.foo, 'foo');
             t.equal(result.bar, 'bar');
             t.equal(result.baz, 'bar-default');

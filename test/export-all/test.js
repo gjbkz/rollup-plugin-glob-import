@@ -24,8 +24,8 @@ t.test('export-all', async (t) => {
                     },
                 ],
             });
-            const output = await bundle.generate({format});
-            const result = runCode(output.code);
+            const {output: [{code}]} = await bundle.generate({format});
+            const result = runCode(code);
             t.equal(result.foo.bar1, 'bar1');
             t.equal(result.foo.bar, 'bar-default');
             t.equal(result.foo.baz, 'baz');

@@ -19,9 +19,9 @@ t.test('basic', async (t) => {
                         globImport({format: importFormat}),
                     ],
                 });
-                const output = await bundle.generate({format});
-                await afs.updateFile(path.join(directory, `output/${format}.${importFormat}.js`), output.code);
-                const result = runCode(output.code);
+                const {output: [{code}]} = await bundle.generate({format});
+                await afs.updateFile(path.join(directory, `output/${format}.${importFormat}.js`), code);
+                const result = runCode(code);
                 const expected = require(`./expected.${importFormat}.js`);
                 t.match(result, expected);
             });

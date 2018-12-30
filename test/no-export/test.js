@@ -17,8 +17,8 @@ t.test('empty-pattern', async (t) => {
                     globImport({format: 'mixed'}),
                 ],
             });
-            const output = await bundle.generate({format});
-            const result = runCode(output.code);
+            const {output: [{code}]} = await bundle.generate({format});
+            const result = runCode(code);
             t.match(result, {foo: 'foo'});
         });
     }
