@@ -20,7 +20,7 @@ jobs:
     steps:
       - attach_workspace: {at: .}
       - run: sudo npm install -g nyc codecov
-      - run: nyc npx test
+      - run: nyc npm test
       - run: codecov
   lint:
     docker: [{image: "circleci/node:lts"}]
