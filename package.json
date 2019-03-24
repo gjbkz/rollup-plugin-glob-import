@@ -32,7 +32,7 @@
     "devDependencies": {
         "@commitlint/cli": "7.3.2",
         "@commitlint/config-conventional": "7.3.1",
-        "@nlib/afs": "0.2.4",
+        "@nlib/afs": "3.5.0",
         "@nlib/lint": "3.5.0",
         "@nlib/util": "0.1.6",
         "eslint": "5.15.3",
