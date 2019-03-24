@@ -46,11 +46,11 @@ workflows:
   version: 2
   run-tests:
     jobs:
-      - onDevelopBranch:
+      - onBranch:
           filters:
             branches: {ignore: master}
             tags: {ignore: /.*/}
-      - build: {requires: [onDevelopBranch]}
+      - build: {requires: [onBranch]}
       - test: {requires: [build]}
       - lint: {requires: [build]}
   release:
