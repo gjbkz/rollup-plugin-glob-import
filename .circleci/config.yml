@@ -12,7 +12,7 @@ jobs:
       - save_cache:
           paths: [node_modules]
           key: dependencies-{{ checksum "package-lock.json" }}
-      - run: npm run build
+      # - run: npm run build
       - run: git diff --exit-code
       - persist_to_workspace: {root: ., paths: [.]}
   test:
