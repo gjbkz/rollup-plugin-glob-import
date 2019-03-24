@@ -3,35 +3,14 @@ os:
   - linux
   - osx
   - windows
-matrix:
-  allow_failures:
-    - os: osx
-    - os: windows
 node_js:
 - '10'
 - '8'
-before_install:
-- export GREENKEEPER=$([[ $(node -v) == v10.* ]]; echo $?)
-- if [[ ${GREENKEEPER} -eq 0 ]]; then npm install -g greenkeeper-lockfile; fi
 install:
 - npm ci
-before_script:
-- if [[ ${GREENKEEPER} -eq 0 ]]; then greenkeeper-lockfile-update; fi
 script:
 - npm run test
 - npm run lint
 after_success:
-- if [[ ${GREENKEEPER} -eq 0 ]]; then greenkeeper-lockfile-upload; fi
 - npm install -g codecov
 - codecov
-env:
-  global:
-    secure: Szhcv6WNRE/mtDHaoDOo+ZeDDFScyGa5FK1YSvqY2mIZJ0rb/PUdMn7OH3IymhyG/aghzvlXiZAyyslsEorOUxli/OGkdYzwVNdnRc/iBo+qbsTkHjYCTgz0oTPKjtBiD5zVrJhhzD7l6b1sCl/v9cbSswzsjK3JmV0RFOjBCqZrVqgGryTIj0eosbfojCHHb7qaLzLLo2bkfnpPmAPQN4onDAL5swbiECT3RrI3vjzhhSwpM2axPFe/QsYLdIaIgKkb5yyXrdhBPGIiv/OUzRJInMS7TEoxhMcZvFsBCf2Rolt3N8DNIa3wd7n2aB2M6tF6+XwNwBOyVMI2oJ/7uUes+KqvpogmtjmddjWPyXAyjGH2Li/7tgF4chsmgYF45jPvMEGNfU7yQdjl2jlwCdFy+5EUgJLmHmfEV5pgt0U9QjZ0s+AuQDUKuV6RfRLqHWcspC4FBpvMYxv+eaIDIsMrB48hg7sutfVODigQjmHQmVykK+fmePifmMXTPu2zSgg0ap9oEps9ClCOP88OkX+SjunEKSGhpbH7KmG7SnW9pDjZH/qLBQIy+mMPZa3y+4TmLU+mePs2sxUsQxjlKR5PLHme+aLaD3SDFiwMI/lCA8pFkiynxc6nL8SYxMosPuPYPNOMY0eJkPWhJTBQaukRgd0pQuQhMi0t8f6brFE=
-deploy:
-  provider: npm
-  email: kei.itof@gmail.com
-  api_key:
-    secure: Uv7wcLSjpXKUnlKv00cJaXtr8DZzXBzD58KGns7j/spps4gnx0+49zkYfYIn8xUMldg9noXU9PDBHAvf67XhTYKOy0+uSOACdCaHht07SijKzpzNF/NpOZukqmhLtR/fQR9UnOj6pUNJe32FgVlBLejrgYR0Sjfa+k02lCjsXAn+FqYRYkSRKWOUBlp5ztBId9COmiSy2aOkth8UE/LMNt6MT7g1g1ajNJfFlNQm1UW3XvYroXJn6tkk11+quuRM240OylgZtHgoXGK9PD7zg4luugoS8Be/O9SLflhQXg/yB11VSnp6QnofFaAVkZrOU/1rkxQMsh3B5hrCfd19TkOGHVDFHsIsgrr21JqFoDsRnyAfygyrdu150GPj0MYjWnKt7b27WE2OI62PPa1t/9sjYH+ENpH5RBFoSFcp4ydkniW6pnugk7xX1IBugbh+w7Yl0ruunAsnvdEykBjxsxSTgkWKO6HMFDlMqRZSjvCmFmzx0HQN/S3l6Oz1eEPXNFQel0hU7p8UH+YmGl35TX7Fry/YrcVAanHIaVQfst6Dw04uVrrqL0N4fZbUn2K36KRC0Lkd7qXhpH/nH3vWsIGVw+8O3zJBjQeONHbh49+0aeuSPdfZmSpq0dH8XRGAV2vipCtqsVTEmdbFLltOQJJWOr7WuStSq7IhqWf3ZMY=
-  on:
-    tags: true
-    repo: kei-ito/rollup-plugin-glob-import
