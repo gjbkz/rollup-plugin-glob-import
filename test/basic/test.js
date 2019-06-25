@@ -8,7 +8,7 @@ const {runCode} = require('../util.js');
 t.test('basic', async (t) => {
     const directory = __dirname;
     const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
-    const importFormats = ['mixed', 'default', 'named', 'import'];
+    const importFormats = ['mixed', 'default', 'all', 'bypath', 'named', 'import'];
     await afs.rmrf(path.join(directory, 'output'));
     for (const importFormat of importFormats) {
         for (const format of formats) {

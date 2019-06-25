@@ -22,8 +22,9 @@ exports.runCode = (code, sandbox = {}) => {
         },
         ...sandbox,
     };
-    sandbox.g = sandbox;
-    sandbox.global = sandbox;
+    const global = {};
+    sandbox.g = global;
+    sandbox.global = global;
     runInNewContext(code, sandbox);
-    return {...sandbox};
+    return global;
 };
