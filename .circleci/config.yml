@@ -24,7 +24,7 @@ jobs:
       - run: c8 report --reporter=text-lcov > coverage.lcov
       - run: codecov
   test-10:
-    docker: [{image: "circleci/node:12"}]
+    docker: [{image: "circleci/node:10"}]
     steps:
       - attach_workspace: {at: .}
       - run: sudo npm install -g codecov c8
@@ -32,7 +32,7 @@ jobs:
       - run: c8 report --reporter=text-lcov > coverage.lcov
       - run: codecov
   test-8:
-    docker: [{image: "circleci/node:lts"}]
+    docker: [{image: "circleci/node:8"}]
     steps:
       - attach_workspace: {at: .}
       - run: sudo npm install -g codecov nyc
