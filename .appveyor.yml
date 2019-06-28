@@ -1,0 +1,15 @@
+cache:
+  - node_modules
+install:
+  - ps: Install-Product node 10
+  - npm ci
+  - npm install -g codecov c8 nyc
+test_script:
+  - npm run build
+  - c8 npm test
+  - c8 report --reporter=text-lcov > coverage.lcov
+  - codecov
+  - ps: Install-Product node 8
+  - nyc npm test
+  - codecov
+build: 'off'

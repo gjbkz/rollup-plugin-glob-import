@@ -1,25 +1,18 @@
 language: node_js
-os:
-  - linux
-  - osx
-  - windows
-node_js:
-- '10'
-- '8'
-before_install:
-- |
-  if [[ $TRAVIS_OS_NAME == windows ]]; then
-    git config --global core.autocrlf false
-    cd ../..
-    mv $TRAVIS_REPO_SLUG _old
-    git clone _old $TRAVIS_REPO_SLUG
-    cd $TRAVIS_REPO_SLUG
-  fi
+cache: npm
+os: osx
+node_js: '12'
 install:
-- npm ci
+  - npm ci
+  - npm install -g codecov c8 nyc
 script:
-- npm run test
-- npm run lint
-after_success:
-- npm install -g codecov
-- codecov
+  - c8 npm test
+  - c8 report --reporter=text-lcov > coverage.lcov
+  - codecov
+  - c8 report --reporter=text-lcov > coverage.lcov
+  - codecov
+  - nvm install 10
+  - npm test
+  - nvm install 8
+  - nyc npm test
+  - codecov
