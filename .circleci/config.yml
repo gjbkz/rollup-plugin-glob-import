@@ -64,7 +64,6 @@ workflows:
     jobs:
       - onBranch:
           filters:
-            branches: {ignore: master}
             tags: {ignore: /.*/}
       - build: {requires: [onBranch]}
       - test-12: {requires: [build]}
