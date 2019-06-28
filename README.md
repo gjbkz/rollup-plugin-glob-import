@@ -1,7 +1,8 @@
 # rollup-plugin-glob-import
 
-[![Build Status](https://travis-ci.org/kei-ito/rollup-plugin-glob-import.svg?branch=master)](https://travis-ci.org/kei-ito/rollup-plugin-glob-import)
 [![CircleCI](https://circleci.com/gh/kei-ito/rollup-plugin-glob-import/tree/master.svg?style=svg)](https://circleci.com/gh/kei-ito/rollup-plugin-glob-import/tree/master)
+[![Build Status](https://travis-ci.com/kei-ito/rollup-plugin-glob-import.svg?branch=master)](https://travis-ci.com/kei-ito/rollup-plugin-glob-import)
+[![Build status](https://ci.appveyor.com/api/projects/status/2f9o877m2t1jc0l7/branch/master?svg=true)](https://ci.appveyor.com/project/kei-ito/rollup-plugin-glob-import/branch/master)
 [![codecov](https://codecov.io/gh/kei-ito/rollup-plugin-glob-import/branch/master/graph/badge.svg)](https://codecov.io/gh/kei-ito/rollup-plugin-glob-import)
 
 A plugin to use glob-star.
