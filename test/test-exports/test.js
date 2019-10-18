@@ -1,5 +1,10 @@
 const t = require('tap');
-const {defaultRenamer} = require('../..');
+const imported = require('../..');
+
+t.test('plugin', (t) => {
+    t.equal(imported, imported.plugin);
+    t.end();
+});
 
 t.test('defaultRenamer', (t) => {
     [
@@ -9,7 +14,7 @@ t.test('defaultRenamer', (t) => {
         {input: [null, 'foo-bar.d.ts'], expected: 'fooBarD'},
     ].forEach(({input, expected}) => {
         t.test(`${JSON.stringify(input)} → ${expected}`, (t) => {
-            const actual = defaultRenamer(...input);
+            const actual = imported.defaultRenamer(...input);
             t.equal(actual, expected);
             t.end();
         });
