@@ -50,4 +50,5 @@ export interface IGlobPluginOptions {
 
 export const plugin: (options: IGlobPluginOptions) => rollup.Plugin;
 export const defaultRenamer: (name: string, id: string) => string;
+export const camelCase: (input: string) => string;
 export default plugin;
