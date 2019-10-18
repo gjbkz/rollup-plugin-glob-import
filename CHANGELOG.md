@@ -1,3 +1,13 @@
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.1...v0.4.2) (2019-10-18)
+
+
+### Features
+
+* export the plugin as 'plugin' ([881eebd](https://github.com/kei-ito/rollup-plugin-glob-import/commit/881eebd))
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.0...v0.4.1) (2019-10-18)
 
