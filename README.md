@@ -18,6 +18,7 @@ npm install --save-dev rollup-plugin-glob-import
 ```javascript
 // rollup.config.js
 const globImport = require('rollup-plugin-glob-import');
+// import {plugin as globImport} from 'rollup-plugin-glob-import';
 export default {
   input: 'path/to/input.js',
   plugins: [
