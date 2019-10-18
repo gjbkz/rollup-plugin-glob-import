@@ -21,3 +21,19 @@ t.test('defaultRenamer', (t) => {
     });
     t.end();
 });
+
+t.test('camelCase', (t) => {
+    [
+        {input: 'aabbccdd', expected: 'aabbccdd'},
+        ...[...'-+*/:;.\'"`?!&~|<>^%#=@[]{}() \\'].map((c) => ({
+            input: `aa${c}bb${c}cc${c}dd`, expected: 'aaBbCcDd',
+        })),
+    ].forEach(({input, expected}) => {
+        t.test(`${JSON.stringify(input)} → ${expected}`, (t) => {
+            const actual = imported.camelCase(input);
+            t.equal(actual, expected);
+            t.end();
+        });
+    });
+    t.end();
+});
