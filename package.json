@@ -5,6 +5,9 @@
     "license": "MIT",
     "repository": "kei-ito/rollup-plugin-glob-import",
     "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
     "author": {
         "name": "Kei Ito",
         "email": "kei.itof@gmail.com",
@@ -19,7 +22,7 @@
     },
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
-        "lint": "eslint --no-inline-config lib test",
+        "lint": "eslint lib test --ignore-pattern output",
         "test": "tap --coverage test/*/test.js",
         "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
         "version:add": "git add .",
