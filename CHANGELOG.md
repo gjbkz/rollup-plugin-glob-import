@@ -1,3 +1,13 @@
+<a name="0.4.4"></a>
+## [0.4.4](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.3...v0.4.4) (2019-10-18)
+
+
+### Features
+
+* expose camelCase ([6615a68](https://github.com/kei-ito/rollup-plugin-glob-import/commit/6615a68))
+
+
+
 <a name="0.4.3"></a>
 ## [0.4.3](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.2...v0.4.3) (2019-10-18)
 
