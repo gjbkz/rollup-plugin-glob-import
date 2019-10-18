@@ -1,3 +1,13 @@
+<a name="0.4.3"></a>
+## [0.4.3](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.2...v0.4.3) (2019-10-18)
+
+
+### Features
+
+* add index.d.ts ([d5d6d22](https://github.com/kei-ito/rollup-plugin-glob-import/commit/d5d6d22))
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.1...v0.4.2) (2019-10-18)
 
