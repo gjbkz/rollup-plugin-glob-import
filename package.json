@@ -27,19 +27,19 @@
     },
     "dependencies": {
         "glob": "^7.1.4",
-        "rollup-pluginutils": "^2.8.1"
+        "rollup-pluginutils": "^2.8.2"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.0.0",
-        "@commitlint/config-conventional": "^8.0.0",
-        "@nlib/afs": "^3.10.1",
-        "@nlib/lint": "^3.10.1",
-        "eslint": "^6.0.1",
-        "husky": "^3.0.0",
-        "lint-staged": "^9.0.0",
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
+        "@nlib/afs": "^3.13.4",
+        "@nlib/lint": "^3.13.4",
+        "eslint": "^6.5.1",
+        "husky": "^3.0.9",
+        "lint-staged": "^9.4.2",
         "npm-run-all": "4.1.5",
-        "rollup": "^1.16.2",
-        "tap": "^14.3.1"
+        "rollup": "^1.24.0",
+        "tap": "^14.7.1"
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",

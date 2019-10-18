@@ -56,6 +56,7 @@
 
 
     var x = /*#__PURE__*/Object.freeze({
+        __proto__: null,
         a: a,
         b: b,
         c: c,
