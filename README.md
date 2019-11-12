@@ -73,7 +73,7 @@ export interface IGlobPluginOptions {
      * A function called before generating intermediate files.
      * You can add or remove files from sources.
      */
-    intercept?: (sources: Array<string>, importer: string, importee: string) => string,
+    intercept?: (sources: Array<string>, importer: string, importee: string) => Array<string>,
 }
 ```
 
