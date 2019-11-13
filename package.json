@@ -1,6 +1,6 @@
 {
     "name": "rollup-plugin-glob-import",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "description": "A rollup plugin to use glob-star.",
     "license": "MIT",
     "repository": "kei-ito/rollup-plugin-glob-import",
@@ -81,10 +81,18 @@
         }
     },
     "lint-staged": {
-        "test/*/src/*.js": ["eslint"],
-        "test/*/*.js": ["eslint"],
-        "test/*.js": ["eslint"],
-        "lib.js": ["eslint"]
+        "test/*/src/*.js": [
+            "eslint"
+        ],
+        "test/*/*.js": [
+            "eslint"
+        ],
+        "test/*.js": [
+            "eslint"
+        ],
+        "lib.js": [
+            "eslint"
+        ]
     },
     "renovate": {
         "extends": [

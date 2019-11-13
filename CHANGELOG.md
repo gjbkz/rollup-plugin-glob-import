@@ -1,3 +1,13 @@
+<a name="0.4.5"></a>
+## [0.4.5](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.4...v0.4.5) (2019-11-13)
+
+
+### Bug Fixes
+
+* filter importer ([f74aedb](https://github.com/kei-ito/rollup-plugin-glob-import/commit/f74aedb))
+
+
+
 <a name="0.4.4"></a>
 ## [0.4.4](https://github.com/kei-ito/rollup-plugin-glob-import/compare/v0.4.3...v0.4.4) (2019-10-18)
 
