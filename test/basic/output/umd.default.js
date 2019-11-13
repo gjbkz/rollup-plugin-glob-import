@@ -1,7 +1,7 @@
 (function (factory) {
     typeof define === 'function' && define.amd ? define(factory) :
     factory();
-}(function () { 'use strict';
+}((function () { 'use strict';
 
     global.aa = 'aa';
     var a = 'a0';
@@ -29,4 +29,4 @@
 
     global.result = x;
 
-}));
+})));

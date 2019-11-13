@@ -81,9 +81,10 @@
         }
     },
     "lint-staged": {
-        "*.js": [
-            "eslint"
-        ]
+        "test/*/src/*.js": ["eslint"],
+        "test/*/*.js": ["eslint"],
+        "test/*.js": ["eslint"],
+        "lib.js": ["eslint"]
     },
     "renovate": {
         "extends": [
