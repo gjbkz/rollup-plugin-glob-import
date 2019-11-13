@@ -1,14 +1,13 @@
 import * as rollup from 'rollup';
 import * as acorn from 'acorn';
 import {CreateFilter} from 'rollup-pluginutils';
-type valueof<T> = T[keyof T]
 
-export enum IntermediateFileFormat {
-    import = 'import',
-    named = 'named',
-    default = 'default',
-    mixed = 'mixed',
-}
+export const IntermediateFileFormat: {
+    import: 'import',
+    named: 'named',
+    default: 'default',
+    mixed: 'mixed',
+};
 
 export interface IGlobPluginOptions {
     /**
@@ -27,7 +26,7 @@ export interface IGlobPluginOptions {
      *   [acorn](https://www.npmjs.com/package/acorn) to check default exports.
      *   Intermediate files export both named exports and default exports.
      */
-    format?: valueof<IntermediateFileFormat>,
+    format?: keyof typeof IntermediateFileFormat,
     /**
      * A function generates the name of exports.
      * It is used if `options.format` is `'mixed'` or `'default'`.
