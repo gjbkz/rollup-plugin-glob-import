@@ -29,24 +29,24 @@
         "version": "npm-run-all --sequential version:changelog version:add"
     },
     "dependencies": {
-        "glob": "^7.1.4",
+        "glob": "^7.1.6",
         "rollup-pluginutils": "^2.8.2"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
-        "@nlib/afs": "^3.13.4",
-        "@nlib/lint": "^3.13.4",
-        "@typescript-eslint/eslint-plugin": "^2.4.0",
-        "@typescript-eslint/parser": "^2.4.0",
-        "conventional-changelog-cli": "^2.0.25",
-        "eslint": "^6.5.1",
+        "@nlib/afs": "^3.13.5",
+        "@nlib/lint": "^3.14.0",
+        "@typescript-eslint/eslint-plugin": "^2.7.0",
+        "@typescript-eslint/parser": "^2.7.0",
+        "conventional-changelog-cli": "^2.0.27",
+        "eslint": "^6.6.0",
         "husky": "^3.0.9",
         "lint-staged": "^9.4.2",
         "npm-run-all": "4.1.5",
-        "rollup": "^1.24.0",
-        "tap": "^14.7.1",
-        "typescript": "^3.6.4"
+        "rollup": "^1.27.0",
+        "tap": "^14.9.2",
+        "typescript": "^3.7.2"
     },
     "eslintConfig": {
         "extends": "./node_modules/@nlib/lint/.eslintrc.json",
