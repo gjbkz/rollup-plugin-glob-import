@@ -33,7 +33,7 @@
         "rollup-pluginutils": "^2.8.2"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.2.0",
+        "@commitlint/cli": "^9.0.0",
         "@commitlint/config-conventional": "^9.0.0",
         "@nlib/afs": "^3.13.5",
         "@nlib/lint": "^3.14.0",
