@@ -22,63 +22,29 @@
     },
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
-        "lint": "eslint lib test --ignore-pattern output",
-        "test": "tap --coverage test/*/test.js",
-        "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
-        "version:add": "git add .",
-        "version": "npm-run-all --sequential version:changelog version:add"
+        "lint": "eslint lib test",
+        "test": "tap test/*/test.js",
+        "version": "run-s version:changelog version:add",
+        "version:changelog": "nlib-changelog --output CHANGELOG.md",
+        "version:add": "git add ."
     },
     "dependencies": {
-        "glob": "^7.1.6",
+        "fast-glob": "^3.2.5",
         "rollup-pluginutils": "^2.8.2"
     },
     "devDependencies": {
-        "@commitlint/cli": "^11.0.0",
-        "@commitlint/config-conventional": "^11.0.0",
-        "@nlib/afs": "^3.13.5",
-        "@nlib/lint": "^3.14.0",
-        "@typescript-eslint/eslint-plugin": "^2.7.0",
-        "@typescript-eslint/parser": "^4.0.0",
-        "conventional-changelog-cli": "^2.0.27",
-        "eslint": "^7.0.0",
-        "husky": "^4.0.0",
-        "lint-staged": "^10.0.0",
+        "@nlib/changelog": "0.1.9",
+        "@nlib/eslint-config": "3.17.21",
+        "@nlib/githooks": "0.0.5",
+        "@nlib/lint-commit": "0.1.4",
+        "@typescript-eslint/eslint-plugin": "4.22.0",
+        "@typescript-eslint/parser": "4.22.0",
+        "eslint": "7.25.0",
+        "lint-staged": "10.5.4",
         "npm-run-all": "4.1.5",
-        "rollup": "^2.0.0",
-        "tap": "^14.9.2",
-        "typescript": "^4.0.0"
-    },
-    "eslintConfig": {
-        "extends": "./node_modules/@nlib/lint/.eslintrc.json",
-        "env": {
-            "es6": true,
-            "node": true
-        },
-        "overrides": [
-            {
-                "files": "test/**",
-                "rules": {
-                    "no-loop-func": "off"
-                }
-            },
-            {
-                "files": "test/*/src/**/*",
-                "rules": {
-                    "func-style": "off"
-                }
-            }
-        ]
-    },
-    "commitlint": {
-        "extends": [
-            "@commitlint/config-conventional"
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "lint-staged"
-        }
+        "rollup": "2.46.0",
+        "tap": "15.0.6",
+        "typescript": "4.2.4"
     },
     "lint-staged": {
         "test/*/src/*.js": [
@@ -90,20 +56,13 @@
         "test/*.js": [
             "eslint"
         ],
-        "lib.js": [
+        "lib/*.js": [
             "eslint"
         ]
     },
     "renovate": {
         "extends": [
-            ":ignoreModulesAndTests",
-            ":unpublishSafe",
-            ":semanticPrefixChore",
-            ":prNotPending",
-            ":prConcurrentLimit10",
-            ":prHourlyLimitNone",
-            ":label(dependencies)",
-            ":automergeMinor"
+            "github>nlibjs/renovate-config"
         ]
     }
 }

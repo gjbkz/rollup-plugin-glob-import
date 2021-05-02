@@ -1,14 +1,14 @@
 const path = require('path');
-const t = require('tap');
+const t1 = require('tap');
 const {rollup} = require('rollup');
 const globImport = require('../..');
 const {runCode} = require('../util.js');
 
-t.test('rename-mixed', async (t) => {
+t1.test('rename-mixed', async (t2) => {
     const directory = __dirname;
     const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
     for (const format of formats) {
-        await t.test(format, async (t) => {
+        await t2.test(format, async (t3) => {
             const actual = [];
             const bundle = await rollup({
                 input: path.join(directory, 'src/input.js'),
@@ -27,9 +27,9 @@ t.test('rename-mixed', async (t) => {
             });
             const {output: [{code}]} = await bundle.generate({format});
             const result = runCode(code);
-            t.equal(result.foo, 'foo');
-            t.equal(result.bar, 'bar');
-            t.equal(result.baz, 'bar-default');
+            t3.equal(result.foo, 'foo');
+            t3.equal(result.bar, 'bar');
+            t3.equal(result.baz, 'bar-default');
         });
     }
 });

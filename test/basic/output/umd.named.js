@@ -48,8 +48,6 @@
         }
     }
 
-
-
     var x = /*#__PURE__*/Object.freeze({
         __proto__: null,
         a1: a1,
@@ -67,16 +65,16 @@
         c3: c1,
         c4: c2,
         C5: C5,
-        d1: d1,
-        d2: d2,
-        d3: d1,
-        d4: d2,
-        D5: D5,
         e1: e1,
         e2: e2,
         e3: e1,
         e4: e2,
-        E5: E5
+        E5: E5,
+        d1: d1,
+        d2: d2,
+        d3: d1,
+        d4: d2,
+        D5: D5
     });
 
     global.result = x;
