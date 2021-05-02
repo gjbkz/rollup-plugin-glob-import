@@ -1,10 +1,10 @@
 const path = require('path');
-const t = require('tap');
+const t1 = require('tap');
 const rollup = require('rollup');
 const globImport = require('../..');
 const {runCode} = require('../util.js');
 
-t.test('intercept', async (t) => {
+t1.test('intercept', async (t2) => {
     const bundle = await rollup.rollup({
         input: path.join(__dirname, 'src/index.js'),
         plugins: [
@@ -20,7 +20,7 @@ t.test('intercept', async (t) => {
     });
     const {output: [{code}]} = await bundle.generate({format: 'es'});
     const result = runCode(code);
-    t.match(result, {
+    t2.match(result, {
         foo: {
             A: 'a',
             B: undefined,

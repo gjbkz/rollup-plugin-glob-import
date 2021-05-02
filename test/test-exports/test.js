@@ -1,39 +1,41 @@
-const t = require('tap');
+const t1 = require('tap');
 const imported = require('../..');
 
-t.test('plugin', (t) => {
-    t.equal(imported, imported.plugin);
-    t.end();
+t1.test('plugin', (t2) => {
+    t2.equal(imported, imported.plugin);
+    t2.end();
 });
 
-t.test('defaultRenamer', (t) => {
-    [
+t1.test('defaultRenamer', (t2) => {
+    const tests = [
         {input: ['aaa', 'foo-bar.js'], expected: 'aaa'},
         {input: ['aaa', 'foo-bar.d.ts'], expected: 'aaa'},
         {input: [null, 'foo-bar.js'], expected: 'fooBar'},
         {input: [null, 'foo-bar.d.ts'], expected: 'fooBarD'},
-    ].forEach(({input, expected}) => {
-        t.test(`${JSON.stringify(input)} → ${expected}`, (t) => {
+    ];
+    for (const {input, expected} of tests) {
+        t2.test(`${JSON.stringify(input)} → ${expected}`, (t3) => {
             const actual = imported.defaultRenamer(...input);
-            t.equal(actual, expected);
-            t.end();
+            t3.equal(actual, expected);
+            t3.end();
         });
-    });
-    t.end();
+    }
+    t2.end();
 });
 
-t.test('camelCase', (t) => {
-    [
+t1.test('camelCase', (t2) => {
+    const tests = [
         {input: 'aabbccdd', expected: 'aabbccdd'},
         ...[...'-+*/:;.\'"`?!&~|<>^%#=@[]{}() \\'].map((c) => ({
             input: `aa${c}bb${c}cc${c}dd`, expected: 'aaBbCcDd',
         })),
-    ].forEach(({input, expected}) => {
-        t.test(`${JSON.stringify(input)} → ${expected}`, (t) => {
+    ];
+    for (const {input, expected} of tests) {
+        t2.test(`${JSON.stringify(input)} → ${expected}`, (t3) => {
             const actual = imported.camelCase(input);
-            t.equal(actual, expected);
-            t.end();
+            t3.equal(actual, expected);
+            t3.end();
         });
-    });
-    t.end();
+    }
+    t2.end();
 });
