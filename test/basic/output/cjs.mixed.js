@@ -50,8 +50,6 @@ class D5 {
     }
 }
 
-
-
 var x = /*#__PURE__*/Object.freeze({
     __proto__: null,
     a: a,
@@ -78,12 +76,12 @@ var x = /*#__PURE__*/Object.freeze({
     d3: d1,
     d4: d2,
     D5: D5,
-    e: e,
     e1: e1,
     e2: e2,
     e3: e1,
     e4: e2,
-    E5: E5
+    E5: E5,
+    e: e
 });
 
 global.result = x;
