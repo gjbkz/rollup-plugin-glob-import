@@ -6,6 +6,9 @@ module.exports = {
         es6: true,
         node: true,
     },
+    rules: {
+        '@nlib/no-globals': 'off',
+    },
     overrides: [
         {
             files: ['test/**'],
