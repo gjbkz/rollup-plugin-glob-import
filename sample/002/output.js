@@ -22,9 +22,8 @@ const dd = 'dd';
 var d = 'd';
 console.log(dd);
 
-
-
 var x = /*#__PURE__*/Object.freeze({
+	__proto__: null,
 	a: a,
 	b: b,
 	e: e,
