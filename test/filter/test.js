@@ -1,16 +1,16 @@
 const path = require('path');
-const afs = require('@nlib/afs');
-const t = require('tap');
+const {promises: afs} = require('fs');
+const t1 = require('tap');
 const {rollup} = require('rollup');
 const globImport = require('../..');
-const {runCode} = require('../util.js');
+const {runCode, clearDirectory} = require('../util.js');
 
-t.test('filter', async (t) => {
+t1.test('filter', async (t2) => {
     const directory = __dirname;
     const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
-    await afs.rmrf(path.join(directory, 'output'));
+    await clearDirectory(path.join(directory, 'output'));
     for (const format of formats) {
-        await t.test(JSON.stringify({format}), async (t) => {
+        await t2.test(JSON.stringify({format}), async (t3) => {
             const bundle = await rollup({
                 input: path.join(directory, 'src/input.js'),
                 plugins: [
@@ -25,10 +25,10 @@ t.test('filter', async (t) => {
                 ],
             });
             const {output: [{code}]} = await bundle.generate({format});
-            await afs.updateFile(path.join(directory, `output/${format}.js`), code);
+            await afs.writeFile(path.join(directory, `output/${format}.js`), code);
             const result = runCode(code);
             const expected = require('./expected.js');
-            t.match(result, expected);
+            t3.match(result, expected);
         });
     }
 });
