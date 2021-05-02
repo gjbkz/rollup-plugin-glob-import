@@ -6,12 +6,6 @@ const bb = 'bb';
 var b = 'b';
 console.log(bb);
 
-const ee = 'ee';
-console.log(ee);
-
-const ff = 'ff';
-console.log(ff);
-
 const cc = 'cc';
 var c = 'c';
 console.log(cc);
@@ -19,5 +13,11 @@ console.log(cc);
 const dd = 'dd';
 var d = 'd';
 console.log(dd);
+
+const ee = 'ee';
+console.log(ee);
+
+const ff = 'ff';
+console.log(ff);
 
 console.log(a, b, c, d);

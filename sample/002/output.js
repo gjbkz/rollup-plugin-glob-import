@@ -6,14 +6,6 @@ const bb = 'bb';
 var b = 'b';
 console.log(bb);
 
-const ee = 'ee';
-var e = 'e';
-console.log(ee);
-
-const ff = 'ff';
-var f = 'f';
-console.log(ff);
-
 const cc = 'cc';
 var c = 'c';
 console.log(cc);
@@ -22,22 +14,30 @@ const dd = 'dd';
 var d = 'd';
 console.log(dd);
 
+const ee = 'ee';
+var e = 'e';
+console.log(ee);
+
+const ff = 'ff';
+var f = 'f';
+console.log(ff);
+
 var x = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	a: a,
 	b: b,
-	e: e,
-	f: f,
 	c: c,
 	d: d,
+	e: e,
+	f: f,
 	aa: aa,
 	bb: bb,
-	ee: ee,
-	ff: ff,
 	cc: cc,
 	c1: cc,
 	c2: cc,
-	dd: dd
+	dd: dd,
+	ee: ee,
+	ff: ff
 });
 
 console.log(x);
