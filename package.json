@@ -22,14 +22,14 @@
     },
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
-        "lint": "eslint lib test --ignore-pattern output",
+        "lint": "eslint lib test",
         "test": "tap test/*/test.js",
         "version": "run-s version:changelog version:add",
         "version:changelog": "nlib-changelog --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "dependencies": {
-        "glob": "^7.1.6",
+        "fast-glob": "^3.2.5",
         "rollup-pluginutils": "^2.8.2"
     },
     "devDependencies": {

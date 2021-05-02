@@ -9,6 +9,10 @@ module.exports = {
     rules: {
         '@nlib/no-globals': 'off',
     },
+    ignorePatterns: [
+        'output',
+        'test/*/src',
+    ],
     overrides: [
         {
             files: ['test/**'],

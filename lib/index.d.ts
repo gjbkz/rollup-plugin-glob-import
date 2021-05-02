@@ -1,6 +1,6 @@
-import * as rollup from 'rollup';
-import * as acorn from 'acorn';
-import {CreateFilter} from 'rollup-pluginutils';
+import type * as rollup from 'rollup';
+import type * as acorn from 'acorn';
+import type {CreateFilter} from 'rollup-pluginutils';
 
 export const IntermediateFileFormat: {
     import: 'import',

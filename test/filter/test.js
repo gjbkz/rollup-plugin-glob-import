@@ -7,7 +7,8 @@ const {runCode, clearDirectory} = require('../util.js');
 
 t1.test('filter', async (t2) => {
     const directory = __dirname;
-    const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
+    const formats = ['es'];
+    // const formats = ['es', 'iife', 'amd', 'cjs', 'umd'];
     await clearDirectory(path.join(directory, 'output'));
     for (const format of formats) {
         await t2.test(JSON.stringify({format}), async (t3) => {
