@@ -9,7 +9,7 @@ export const IntermediateFileFormat: {
     mixed: 'mixed',
 };
 
-export interface IGlobPluginOptions {
+export interface GlobPluginOptions {
     /**
      * The first argument of [rollup-pluginutils.createfilter](https://github.com/rollup/rollup-pluginutils#createfilter).
      */
@@ -48,7 +48,7 @@ export interface IGlobPluginOptions {
     intercept?: (sources: Array<string>, importer: string, importee: string) => Array<string>,
 }
 
-export const plugin: (options: IGlobPluginOptions) => rollup.Plugin;
+export const plugin: (options: GlobPluginOptions) => rollup.Plugin;
 export const defaultRenamer: (name: string, id: string) => string;
 export const camelCase: (input: string) => string;
 export default plugin;
