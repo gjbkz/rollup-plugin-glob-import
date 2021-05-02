@@ -1,0 +1,124 @@
+name: Test
+on:
+  - push
+  - pull_request
+jobs:
+  CheckRenovate:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+        node:
+          - 14.x
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install -g renovate
+      - run: renovate-config-validator
+  Setup:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node:
+          - 14.x
+    steps:
+      - run: git config --global core.autocrlf false
+      - run: git config --global core.eol lf
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            node_modules-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
+            node_modules-${{ matrix.os }}-
+            node_modules-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm install --no-save c8
+      - uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ matrix.os }}-${{ github.run_number }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm run build
+      - run: npm run lint
+  Test:
+    runs-on: ${{ matrix.os }}
+    needs:
+      - Setup
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node:
+          - 14.x
+          - 12.x
+    steps:
+      - run: git config --global core.autocrlf false
+      - run: git config --global core.eol lf
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ matrix.os }}-${{ github.run_number }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npx c8 npm test
+      - run: npx c8 report --reporter=text-lcov > coverage.lcov
+      - uses: codecov/codecov-action@v1
+  Publish:
+    if: contains(github.ref, 'tags/v')
+    runs-on: ${{ matrix.os }}
+    needs:
+      - Test
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+        node:
+          - 14.x
+    environment: deployment
+    steps:
+      - run: git config --global core.autocrlf false
+      - run: git config --global core.eol lf
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ matrix.os }}-${{ github.run_number }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://registry.npmjs.org
+      - run: npx remove-sourcemap --directory lib --ext js
+      - run: npx cleanup-package-json --file package.json
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -23,7 +23,7 @@
     "scripts": {
         "sample": "rollup --config sample/rollup.config.js",
         "lint": "eslint lib test --ignore-pattern output",
-        "test": "tap --coverage test/*/test.js",
+        "test": "tap test/*/test.js",
         "version": "run-s version:changelog version:add",
         "version:changelog": "nlib-changelog --output CHANGELOG.md",
         "version:add": "git add ."
