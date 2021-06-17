@@ -38,7 +38,7 @@
         "@nlib/githooks": "0.0.5",
         "@nlib/lint-commit": "0.1.4",
         "@typescript-eslint/eslint-plugin": "4.27.0",
-        "@typescript-eslint/parser": "4.26.1",
+        "@typescript-eslint/parser": "4.27.0",
         "eslint": "7.28.0",
         "lint-staged": "11.0.0",
         "npm-run-all": "4.1.5",
