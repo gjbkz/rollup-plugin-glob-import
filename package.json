@@ -35,14 +35,28 @@
     "devDependencies": {
         "@nlib/eslint-config": "3.17.25",
         "@nlib/githooks": "0.1.0",
-        "@typescript-eslint/eslint-plugin": "4.31.0",
-        "@typescript-eslint/parser": "4.31.0",
+        "@typescript-eslint/eslint-plugin": "^4.31.0",
+        "@typescript-eslint/parser": "^4.31.0",
         "eslint": "7.32.0",
         "lint-staged": "11.1.2",
         "npm-run-all": "4.1.5",
         "rollup": "2.56.3",
-        "tap": "15.0.9",
-        "typescript": "4.4.2"
+        "tap": "15.0.9"
+    },
+    "eslintConfig": {
+        "extends": [
+            "@nlib/eslint-config"
+        ],
+        "env": {
+            "node": true
+        },
+        "rules": {
+            "@nlib/no-globals": "off"
+        },
+        "ignorePatterns": [
+            "output",
+            "test/*/src"
+        ]
     },
     "lint-staged": {
         "test/*/src/*.js": [
