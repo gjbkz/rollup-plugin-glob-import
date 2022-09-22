@@ -35,7 +35,7 @@
     "devDependencies": {
         "@nlib/eslint-config": "3.18.0",
         "@nlib/githooks": "0.1.0",
-        "@typescript-eslint/eslint-plugin": "5.37.0",
+        "@typescript-eslint/eslint-plugin": "5.38.0",
         "@typescript-eslint/parser": "5.37.0",
         "eslint": "8.23.1",
         "lint-staged": "12.5.0",
