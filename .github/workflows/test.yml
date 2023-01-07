@@ -28,4 +28,4 @@ jobs:
       - run: npm ci
       - run: npx c8 npm test
       - run: npx c8 report --reporter=text-lcov > coverage.lcov
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
