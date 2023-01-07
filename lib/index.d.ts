@@ -51,4 +51,5 @@ export interface GlobPluginOptions {
 export const plugin: (options: GlobPluginOptions) => rollup.Plugin;
 export const defaultRenamer: (name: string, id: string) => string;
 export const camelCase: (input: string) => string;
+// eslint-disable-next-line import/no-default-export
 export default plugin;

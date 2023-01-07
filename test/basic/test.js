@@ -22,6 +22,7 @@ t1.test('basic', async (t2) => {
                 const {output: [{code}]} = await bundle.generate({format});
                 await afs.writeFile(path.join(directory, `output/${format}.${importFormat}.js`), code);
                 const result = runCode(code);
+                // eslint-disable-next-line import/no-dynamic-require
                 const expected = require(`./expected.${importFormat}.js`);
                 t3.match(result, expected);
             });

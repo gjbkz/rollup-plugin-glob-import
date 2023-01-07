@@ -56,6 +56,17 @@
         "ignorePatterns": [
             "output",
             "test/*/src"
+        ],
+        "overrides": [
+            {
+                "files": [
+                    "*.js"
+                ],
+                "rules": {
+                    "import/no-commonjs": "off",
+                    "import/unambiguous": "off"
+                }
+            }
         ]
     },
     "lint-staged": {
