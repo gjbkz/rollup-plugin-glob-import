@@ -29,7 +29,7 @@
         "version:add": "git add ."
     },
     "dependencies": {
-        "fast-glob": "3.3.2",
+        "fast-glob": "3.3.3",
         "rollup-pluginutils": "2.8.2"
     },
     "devDependencies": {
