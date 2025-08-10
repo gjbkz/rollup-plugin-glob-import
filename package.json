@@ -33,7 +33,7 @@
         "rollup-pluginutils": "2.8.2"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.19.6",
+        "@nlib/eslint-config": "3.20.5",
         "@nlib/githooks": "0.2.0",
         "@typescript-eslint/eslint-plugin": "5.62.0",
         "@typescript-eslint/parser": "5.62.0",
