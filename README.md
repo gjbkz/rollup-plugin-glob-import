@@ -1,9 +1,24 @@
-# rollup-plugin-glob-import
-
-[![.github/workflows/test.yml](https://github.com/gjbkz/rollup-plugin-glob-import/actions/workflows/test.yml/badge.svg)](https://github.com/gjbkz/rollup-plugin-glob-import/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/kei-ito/rollup-plugin-glob-import/branch/master/graph/badge.svg)](https://codecov.io/gh/kei-ito/rollup-plugin-glob-import)
+# Deprecated: rollup-plugin-glob-import
 
 A plugin to use glob-star in import source.
+
+This library has been archived and is no longer maintained.
+
+## Rationale
+1. **Lack of TypeScript support**  
+   This plugin does not provide proper support for TypeScript declaration generation or type safety.  
+   In the TypeScript era, using glob imports without type guarantees is not recommended.
+
+2. **Preferred design direction**  
+   Instead of using `import "./path/*.ts"` with glob-star,  
+   we recommend **generating an `index.ts` file from the glob results** and re-exporting modules explicitly.  
+   This approach works better with IDEs and type checking.
+
+## Suggested alternatives
+- If you are using Vite, consider [`import.meta.glob`](https://vitejs.dev/guide/features.html#glob-import).  
+- For Rollup or other bundlers, generating an `index.ts` barrel file at build time is the preferred approach.
+
+Thank you for using this plugin until now.
 
 ```javascript
 import foo from './path/to/lib/*.js';
